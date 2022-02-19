@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storylet",
+  "description": "Definition of a storylet",
+  "type": "object",
+  "properties": {
+
+    "storyletID": {
+      "description": "The unique identifier for the storylet",
+      "type": "integer"
+    },
+    "storyletCat": {
+      "description": "The storylet category",
+      "type": "string",
+      "enum": ["gen-story", "sovereign", "champion", "lover", "magician"]
+    },
+    "storyletPic": {
+      "description": "Handle of the storylet illustration",
+      "type": "string"
+    },
+    "storyletIf": {
+      "description": "Requirements for the storylet to be open",
+      "type": "array",
+      "items": { "$ref": "#/$defs/condition" }
+    },
+
+    "storyletText": {
+      "description": "The main text of the storylet",
+      "type": "string",
+      "maxLength": 280
+    },
+    "storyletOptions": {
+      "description": "The storylet options",
+      "type": "array",
+      "items": { "$ref": "#/$defs/option" }
+    },
+
+    "storyletComment" : {
+      "description": "Comment - Any non-gameplay info about the storylet",
+      "type": "string"
+    }
+  },
+
+  "required": [ "storyletID" , "storyletCat", "storyletText", "storyletIf", "storyletOptions"],
+
+  "$defs": {
+    "option": {
+      "description": "An option for a storylet",
+      "type": "object",
+      "properties": {
+        "optionText": {
+          "description": "The text of the option",
+          "type": "string",
+          "maxLength": 80
+        },
+        "archetypes": {
+          "description": "Comment - The archetypes associated with the  option",
+          "type": "string"
+        },
+        "optionOutcomes": {
+          "description": "Outcome(s) of the option",
+          "type": "object",
+          "properties": {
+            "defaultOutcomeText": {
+              "definition": "Text of the default outcome of the option",
+              "type": "string",
+              "maxLength": 280
+            },
+            "defaultOutcomeEffect": {
+              "description": "List of effects to be applied with this outcome",
+              "type": "array",
+              "items": { "$ref": "#/$defs/effect" }
+            },
+
+            "alternativeOutcomeIf": {
+              "description": "Requirements for the alternative outcome to be played instead of the default one",
+              "type": "array",
+              "items": { "$ref": "#/$defs/condition" }
+            },
+            "alternativeOutcomeText": {
+              "definition": "Text of the alternative outcome of the option",
+              "type": "string",
+              "maxLength": 280
+            },
+            "alternativeOutcomeEffect": {
+              "description": "List of effects to be applied with this outcome",
+              "type": "array",
+              "items": { "$ref": "#/$defs/effect" }
+            }
+          },
+          "required": ["defaultOutcomeText", "defaultOutcomeEffect"]
+        }
+      },
+
+      "required": ["optionText", "optionOutcomes"],
+
+      "$defs": {
+
+        "effect": {
+          "description": "A effect of an outcome",
+          "type": "object",
+          "properties": {
+            "variable": {
+              "description": "The name of the variable to be affected",
+              "type": "string",
+              "enum": ["sovereignMastery", "championMastery", "loverMastery", "magicianMastery", "sovereignChallenge", "championChallenge", "loverChallenge", "magicianChallenge"]
+            },
+            "modifyer": {
+              "description": "The number to be added to the variable, can be negative",
+              "type": "integer"
+            }
+          },
+          "required": ["variable", "modifyer"]
+        },
+
+        "condition": {
+          "description": "A condition for a storylet or outcome",
+          "type": "object",
+          "properties": {
+            "variable": {
+              "description": "The variable to be checked",
+              "type": "string"
+            },
+            "compType": {
+              "description": "The type of comparison",
+              "type": "string",
+              "enum": ["IS", "IS NOT", "GREATER THAN", "LESSER THAN"]
+            },
+            "compValue": {
+              "description": "The value to compare the variable with",
+              "type": ["string", "integer", "boolean"]
+            }
+          },
+          "required": ["variable", "compType", "compValue"]
+        }
+      }
+    },
+
+    "condition": {
+      "description": "A condition for a storylet or outcome",
+      "type": "object",
+      "properties": {
+        "variable": {
+          "description": "The variable to be checked",
+          "type": "string"
+        },
+        "compType": {
+          "description": "The type of comparison",
+          "type": "string",
+          "enum": ["IS", "IS NOT", "GREATER THAN", "LESSER THAN"]
+        },
+        "compValue": {
+          "description": "The value to compare the variable with",
+          "type": ["string", "integer", "boolean"]
+        }
+      },
+      "required": ["variable", "compType", "compValue"]
+    }
+  }
+}
