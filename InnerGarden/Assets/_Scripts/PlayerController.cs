@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public Transform playerCamera = null;
     public float mouseSensitivity = 3.5f;
 
+    public GameObject target;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
+        transform.RotateAround(target.transform.position, Vector3.up,  mouseDelta.x * mouseSensitivity);
     }
 }
