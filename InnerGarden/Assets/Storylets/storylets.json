@@ -1,0 +1,66 @@
+[
+  {
+    "storyletID": 1,
+    "storyletPic": "picHandle",
+    "storyletIf": [],
+    "storyletText": "As part of a kick-off seminar with some new clients, you are having lunch with their tech team.
+    One of their developers is currently going on a tangent about how \"obviously homos shouldn't be allowed to have children, they'll raise them to be deviant or criminal\".",
+    "storyletOptions": [
+      {"optionText": "You icily remind them that hate speech is illegal and that she really should know to keep her backward opionions to herself.", "optionArchetype": "champion"},
+      {"optionText": "You stoically ignore her, knowing that opposing her would be just as professionally inapropriate as her behaviour.", "optionArchetype": "sovereign"},
+      {"optionText": "You sweetly ask her whether you're a deviant or a criminal, in her wise opinion.", "optionArchetype": "lover"}
+    ]
+  },
+
+  {
+    "storyletID": 2,
+    "storyletPic": "picHandle",
+    "storyletIf": [],
+    "storyletText": "You are spending the weekend at your brother's. You are not used to living with children, so you made the mistake of leaving your drawing supplies out after sketching late into the night.
+    You wake up to find your nieces, 5 and 7, giggling over your sketch book, smushing charcoal all over the place.",
+    "storyletOptions": [
+      {"optionText": "You call their parents to do some damage control. You shouldn't have left everything out, but the kids probably shouldn't be going around unsupervised...", "optionArchetype": "sovereign"},
+      {"optionText": "You gather everything as fast as you can, with some stern words with the girls on how it's not okay to play with expensive supplies like that.", "optionArchetype": "magician"},
+      {"optionText": "You try to turn their curiosity into a nice bonding moment, by offering to draw together, even if that charcoal is going to be a disaster to clean.", "optionArchetype": "lover"}
+    ]
+  },
+
+  {
+    "storyletID": 3,
+    "storyletPic": "picHandle",
+    "storyletIf": [],
+    "storyletText": "The non-profit you volunteer for is holding a social gathering tonight, and everyone is supposed to bring food to share.
+    You are, of course, planning to bake a cake, but you need to decide which one.",
+    "storyletOptions": [
+      {"optionText": "You'll pick a new fancy recipe, to challenge yourself. Maybe cream puffs?", "optionArchetype": "magician"},
+      {"optionText": "You should go for a recipe with as little allergy sources as possible, like gluten- and lactose-free rasberry muffins.", "optionArchetype": "sovereign"},
+      {"optionText": "You know that cheesecake is a reliable crowd-pleasure with that group. And one of the volunteers, who's had a pretty terrible week, has a thing for citrus flavours. A lemon cheesecake it is!", "optionArchetype": "lover"}
+    ]
+  }
+
+  {
+    "storyletID": 4,
+    "storyletPic": "picHandle",
+    "storyletIf": [],
+    "storyletText": "Your brother, the younger one, is getting married. He asked you to join his partner and he on a cake tasting endeavour, since you're the family's pastry expert.
+    Problem is, you can't stand the bride. It's cliche, but you find her boring and a stick in the mud. Not that you told your brother that...",
+    "storyletOptions": [
+      {"optionText": "There's going to be cake, though. A lot of professional fancy cakes, and you'll be able to ask questions. You'll focus on the goods and ignore his partner's uninspired chatter.", "optionArchetype": "magician"},
+      {"optionText": "He's your brother, and he's -hopefully- not going to get married that often. It's important to him, so you'll go!", "optionArchetype": "lover"},
+      {"optionText": "Maybe it's time to have an heart-to-heart with your brother, admit that you find hir partner terribly annoying. And maybe hope he'll reconsider because she can't be good for him, even if you're aware it's none of your business.", "optionArchetype": "champion"}
+    ]
+  }
+
+  {
+    "storyletID": 5,
+    "storyletPic": "picHandle",
+    "storyletIf": [],
+    "storyletText": "It's been some time since you've sorted through your drawings, and sketch books and canson sheets are piling up on the side of your desk.
+    You should go through them, and much harder, decide what to do with them since you don't have room to keep every single drawing you make. Some you'll have to throw away, but what to do with the nicer ones?",
+    "storyletOptions": [
+      {"optionText": "You keep them, as a reminder of your progress.", "optionArchetype": "magician"},
+      {"optionText": "You gift them to your family and friends.", "optionArchetype": "lover"},
+      {"optionText": "You get together with other art-inclined friends to set up a small exhibit to fund your non-profit.", "optionArchetype": "champion"}
+    ]
+  }
+]

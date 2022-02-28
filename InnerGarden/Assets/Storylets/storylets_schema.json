@@ -9,11 +9,6 @@
       "description": "The unique identifier for the storylet",
       "type": "integer"
     },
-    "storyletCat": {
-      "description": "The storylet category",
-      "type": "string",
-      "enum": ["gen-story", "sovereign", "champion", "lover", "magician"]
-    },
     "storyletPic": {
       "description": "Handle of the storylet illustration",
       "type": "string"
@@ -23,18 +18,16 @@
       "type": "array",
       "items": { "$ref": "#/$defs/condition" }
     },
-
     "storyletText": {
       "description": "The main text of the storylet",
       "type": "string",
-      "maxLength": 280
+      "maxLength": 500
     },
     "storyletOptions": {
       "description": "The storylet options",
       "type": "array",
       "items": { "$ref": "#/$defs/option" }
     },
-
     "storyletComment" : {
       "description": "Comment - Any non-gameplay info about the storylet",
       "type": "string"
@@ -51,51 +44,16 @@
         "optionText": {
           "description": "The text of the option",
           "type": "string",
-          "maxLength": 80
+          "maxLength": 280
         },
-        "archetypes": {
-          "description": "Comment - The archetypes associated with the  option",
-          "type": "string"
-        },
-        "optionOutcomes": {
-          "description": "Outcome(s) of the option",
-          "type": "object",
-          "properties": {
-            "defaultOutcomeText": {
-              "definition": "Text of the default outcome of the option",
-              "type": "string",
-              "maxLength": 280
-            },
-            "defaultOutcomeEffect": {
-              "description": "List of effects to be applied with this outcome",
-              "type": "array",
-              "items": { "$ref": "#/$defs/effect" }
-            }
-          },
-          "required": ["defaultOutcomeText", "defaultOutcomeEffect"]
+        "optionArchetype": {
+          "description": "The archetype associated with the option, will increase if the option is chosen",
+          "type": "string",
+          "enum": ["sovereign", "champion", "lover", "magician"]
         }
       },
 
-      "required": ["optionText", "optionOutcomes"],
-
-      "$defs": {
-        "effect": {
-          "description": "A effect of an outcome",
-          "type": "object",
-          "properties": {
-            "variable": {
-              "description": "The name of the variable to be affected",
-              "type": "string",
-              "enum": ["sovereignMastery", "championMastery", "loverMastery", "magicianMastery"]
-            },
-            "modifyer": {
-              "description": "The number to be added to the variable, can be negative",
-              "type": "integer"
-            }
-          },
-          "required": ["variable", "modifyer"]
-        }
-      }
+      "required": ["optionText", "optionArchetype"]
     },
 
     "condition": {
