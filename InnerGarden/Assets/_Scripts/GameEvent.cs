@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
+using Narrative;
 
-
-// Just putting this here for now, will move to correspond with the JSON reader.
-public enum StoryletType
+namespace Narrative
 {
-    GENERIC,
-    SOVEREIGN,
-    CHAMPION,
-    LOVER,
-    MAGICIAN
+    // Just putting this here for now, will move to correspond with the JSON reader.
+    public enum Archetype
+    {
+        SOVEREIGN,
+        CHAMPION,
+        LOVER,
+        MAGICIAN
+    }
+
+    public class StoryLet
+    {
+        public string body;
+        public string[] answers;
+        public Archetype[] answerKey;
+    }
 }
 
 // A GameEvent is the gameplay code for the story let 
@@ -22,36 +30,42 @@ public class GameEvent : MonoBehaviour
 
     // Lets keep the seed around for now
     const int seed = 2151;
-    private const int k_typeCount = 5;
+    public int k_cardCount = 9;
+    public int gridSize = 3;
 
     public EventStates currentState;
     public Transform cardPrefab;
     public Transform storyCanvas;
+    public Transform backCardPrefab;
+    public Transform gardenButton;
+    public int entryReq = 5;   // garden entry requirements
+
+    public string gardenBtnText = "Enter the Garden\n (";
 
     public static List<int> availableStorylets;  // lets hope the GameManger can update this for us, so the "event" doesn't need to know anything about the player. 
 
+    public static GameManager gm;
 
     // Hardcoding colour for archetypes here. TODO: Update with json filling instead
     public Color[] cardColours = new Color[5];
 
-    // Initial fade to background
-    // Transition to two cards with a choice
-    // When choice is made, display the story + other options. 
-    // Some sort of end.
-
-    private Transform cardA, cardB;
-    private Button btnA, btnB;
-    private GameObject[] cardGOs = new GameObject[2];
+    private GameObject[] cardGOs;
 
     private GameObject chosenStory;
+    private Transform chosenStoryTrans;
+
+    private Narrative.StoryLet currentStoryLet;
+
     // vars for UI animation
     private Transform startPosition;
     public float speed = 1.0F;
     private float startTime;
     private float journeyLength;
 
-    // this should tie into the screen/resolution ideally.
-    private Vector3 offset = new Vector3(400.0f, 0.0f, 0.0f);
+    // this should tie into the screen/resolution ideally. // TODO
+    private Vector3 gridPosition = new Vector3(500.0f, 500.0f, 0.0f);
+    private Vector3 colOffset = new Vector3(250.0f, 0.0f, 0.0f);
+    private Vector3 rowOffset = new Vector3(0.0f, -250.0f, 0.0f);
 
     public enum EventStates
     {
@@ -68,29 +82,25 @@ public class GameEvent : MonoBehaviour
         
         Random.InitState(seed);
 
+        cardGOs = new GameObject[k_cardCount];
+
         // Will need to instantiate card prefabs here
-        cardA = Instantiate(cardPrefab, storyCanvas);
-        cardA.SetParent(storyCanvas);
-        cardGOs[0] = cardA.gameObject;
+        for (int i = 0; i < k_cardCount; i++)
+        {
+            CreateCard(i);
+        }
 
-        cardB = Instantiate(cardPrefab, storyCanvas);
-        cardB.SetParent(storyCanvas);
-        cardB.position += offset;
-        cardGOs[1] = cardB.gameObject;
-
-        // hidey
-        cardGOs[0].SetActive(false);
-        cardGOs[1].SetActive(false);
-
-        // initialise colours
+        // initialise colours TODO not used currently
         cardColours[0] = new Color(0.95f, 0.6f, 0.1f, 1.0f);
         cardColours[1] = new Color(0.67f, 0.1f, 0.8f, 1.0f);
         cardColours[2] = new Color(1.0f, 0.0f, 0.1f, 1.0f);
         cardColours[3] = new Color(1.0f, 0.6f, 0.9f, 1.0f);
         cardColours[4] = new Color(0.0f, 0.8f, 0.95f, 1.0f);
 
-        RandomizeCards(); // this will create the cards but not display them until EventState has switched
+        // TODO We don't currently have Random anymore for the stories as it's hardcoded. 
 
+        // disable the garden button until later.
+        gardenButton.GetComponent<Button>().interactable = false;
     }
 
     // Update is called once per frame
@@ -115,6 +125,36 @@ public class GameEvent : MonoBehaviour
         }
     }
 
+    private void CreateCard(int index)
+    {
+        Transform card = Instantiate(cardPrefab, storyCanvas);
+        card.SetParent(storyCanvas);
+        card.position += gridPosition;
+
+        int colValue = index % gridSize;
+
+        card.position += (colOffset * colValue);
+
+        int rowValue = (int)Mathf.Floor(index / gridSize);
+        card.position += (rowOffset * rowValue);
+        
+        cardGOs[index] = card.gameObject;
+        cardGOs[index].SetActive(false);
+
+
+        // TODO we probably don't need this part anymore, but can be used to give variation to the card backs. 
+        if (colValue == 1)
+        {
+            int mainArchetype = 2;
+            Button btn = CreateEventCard(card, mainArchetype);
+        }
+        else
+        {
+            Button btn = CreateEventCard(card, 0); // generic
+        }
+
+    }
+
     private IEnumerator Countdown2()
     {
         while (currentState != EventStates.EVENTCHOICE)
@@ -126,75 +166,120 @@ public class GameEvent : MonoBehaviour
         }
     }
 
-    public void RandomizeCards()
-    {
-        // we could weight this if we want, for now I've just made sure it doesn't pick the same type twice.
-        // probably want to return a tuple of IDs (depending on which Storylet picked)
-        // to do this we'll also probably need a list of available choices to us! and one's we've picked before. 
-
-        // unless we wanted the player's archetypes & past to determine the next choices.. 
-
-        // Ask the reader for a storylet
-        // 
-        int first = Random.Range(0, k_typeCount);
-        int second = first;
-        while (second == first)
-        {
-            second = Random.Range(0, k_typeCount);
-        }
-
-        btnA = createEventCard(cardA, first);
-        btnB = createEventCard(cardB, second);
-    }
-
     public void ShowCards()
     {
         foreach (GameObject go in cardGOs)
         {
-            go.SetActive(true);
+            if (go)
+                go.SetActive(true);
         }
     }
 
     // this creates a button handle, assigns the text colour & callback. 
-    public Button createEventCard(Transform card, int inputChoice)
+    public Button CreateEventCard(Transform card, int inputChoice)
     {
         if (card.GetComponentInChildren<Text>()) // nullcheck
         {
-            card.GetComponentInChildren<Text>().text = ((StoryletType)inputChoice).ToString();
+            card.GetComponentInChildren<Text>().text = (inputChoice).ToString();
             card.GetComponentInChildren<Image>().color = cardColours[inputChoice];
         }
 
         Button btn = card.GetComponentInChildren<Button>();
-        btn.onClick.AddListener(delegate { TaskOnClick(btn); });
+        btn.onClick.AddListener(delegate { TaskOnClickCard(btn); });
         return btn;
+    }
+
+    void TaskOnClickCard(Button btn)
+    {
+        if (currentState == EventStates.EVENTCHOICE)
+        {
+            currentState = EventStates.NARRATIVECHOICE;
+            Debug.Log("You have clicked the button!");
+
+            chosenStory = btn.transform.parent.gameObject;
+
+            // bring to front. 
+            chosenStory.GetComponent<RectTransform>().SetAsLastSibling();
+
+            // deletes chosen card and turns it into a story card
+            chosenStory = CreateStoryCard(btn.transform.position);
+        }
+        // disables the rest
+    }
+
+    void OptionChosen(Archetype arch)
+    {
+        Debug.Log("You scored! " + arch.ToString());
+        GameManager.IncreaseScore(arch);
+
+        // What do we do when finished? 
+        Destroy(chosenStory);
+        currentState = EventStates.EVENTCHOICE;
+
+        gardenButton.GetComponentInChildren<Text>().text = gardenBtnText + "(" + GameManager.gardenCounter + "/" + entryReq + ")";
+
+        if (GameManager.gardenCounter == entryReq)
+        {
+            GameManager.PrintScores();
+            gardenButton.GetComponent<Button>().interactable = true;
+        }
+
+
+        // TODO should really delete dangling GO References
+        
+    }
+
+    public GameObject CreateStoryCard(Vector3 inPos)
+    {
+        // flip prefab?
+        Destroy(chosenStory);
+        chosenStoryTrans = Instantiate(backCardPrefab.transform, storyCanvas);
+        chosenStoryTrans.SetParent(storyCanvas);
+        chosenStoryTrans.position = inPos;
+        startPosition = chosenStoryTrans;
+
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(startPosition.position, storyCanvas.position);
+
+        // Update Text
+        // this should return a story object that we can use, at the moment I'm returning a string. 
+        currentStoryLet = GameManager.GetStory();
+
+        Text cardText = chosenStoryTrans.GetComponentInChildren<Text>();
+
+        cardText.text = currentStoryLet.body;
+
+        Button[] cardBtns = chosenStoryTrans.GetComponentsInChildren<Button>();
+
+        for (uint i = 0; i < currentStoryLet.answers.Length; i++)
+        {
+            // first btn is body text
+            cardBtns[i+1].GetComponentInChildren<Text>().text = currentStoryLet.answers[i];
+
+            // answer key is the archetypes of the options. 
+            var index = i; // have to keep a reference of i as using delegate
+            cardBtns[i+1].onClick.AddListener(delegate { OptionChosen(currentStoryLet.answerKey[index]); });
+        }
+
+        return chosenStoryTrans.gameObject;
+
     }
 
     public void DisplayNarrativeChoices()
     {
         // lerp movement of card to middle position
-
-        float distCovered = (Time.time - startTime) * speed;
-
+        float deltaT = Time.time - startTime;
+        float distCovered = deltaT * speed;
         float fractionOfJourney = distCovered / journeyLength;
 
         // Set our position as a fraction of the distance between the markers.
-        chosenStory.transform.position = Vector3.Lerp(startPosition.position, storyCanvas.position, fractionOfJourney);
+        if (chosenStoryTrans)
+            chosenStoryTrans.position = Vector3.Lerp(startPosition.position, storyCanvas.position, fractionOfJourney);
+    }   
 
-        chosenStory.GetComponentInChildren<Text>().text = "chosens story timeeee \n a\n b\n c\n";
-
-
-    }
-
-    void TaskOnClick(Button btn)
+    // TODO probably don't need this function anymore.
+    void DestroyAllCards()
     {
-        currentState = EventStates.NARRATIVECHOICE;
-        Debug.Log("You have clicked the button!");
-        print(btn);
-        chosenStory = btn.transform.parent.gameObject;
-        startPosition = btn.transform;
-        startTime = Time.time;
-        journeyLength = Vector3.Distance(startPosition.position, storyCanvas.position);
-
         // destroy the other cards.
         foreach (GameObject go in cardGOs)
         {
@@ -202,8 +287,5 @@ public class GameEvent : MonoBehaviour
             if (go != chosenStory)
                 Destroy(go);
         }
-
-        
-        
     }
 }
