@@ -225,4 +225,16 @@ Your phone rings, it’s your best friend. She probably wants to know how you ar
     ]
   },
 
+  {
+    "storyletID": 20,
+    "storyletPic": "picHandle",
+    "storyletText": "You are watching a live stream of a new video game.
+    As the streamer dives into the menus and reviews the accessibility options, another viewer starts making snide comments about devs ruining the game to accomodate \"weak people\".",
+    "storyletOptions": [
+      {"optionText": "You draw a quick caricature of a cartoon character throwing a tantrum because the world doesn't revolve around them, and share it on the chat as an answer.", "optionArchetype": "magician"},
+      {"optionText": "You flag the comments for moderation, knowing the the streamer does their best not to allow ableist discourse on their videos.", "optionArchetype": "sovereign"},
+      {"optionText": "You flood the chat with links to resources about accessibility and why it's important, for disabled players and for the quality of the game in general.", "optionArchetype": "champion"}
+    ]
+  },
+
 ]
