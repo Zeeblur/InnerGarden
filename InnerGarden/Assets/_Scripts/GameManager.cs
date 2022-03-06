@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 using Data = Narrative;
 
 
@@ -27,13 +27,15 @@ public class GameManager : MonoBehaviour
     // We don't have a player atm so just leaving "scores" here as a set of ints.
     private int[] m_scores = new int[4] { 0, 0, 0, 0 };
 
-    // read only counter for if available to get into garden
+    // read only counters for if available to get into garden
     public static int gardenCounter { get; private set; }
+    public static int gardenVisits { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
         gardenCounter = 0;
+        gardenVisits = 0;
         print(Screen.currentResolution);
     }
 
@@ -71,6 +73,12 @@ public class GameManager : MonoBehaviour
     {
         Instance.m_scores[((int)inA)]++;
         gardenCounter++;
+    }
+
+    public static void LeaveGarden()
+    {
+        gardenVisits++;
+        SceneManager.LoadScene("Story");
     }
 
     public static void PrintScores()

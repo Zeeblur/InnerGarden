@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ab77cff157902d34f9c7e0d8ec812775, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.32896218, g: 0.7612936, b: 0.99777514, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -505,7 +505,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5091624368261784263, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_Text
-      value: Enter the Garden
+      value: 'Enter the Garden
+
+        (0/5)'
       objectReference: {fileID: 0}
     - target: {fileID: 5405783543515785112, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_Enabled
@@ -671,7 +673,7 @@ MonoBehaviour:
   storyCanvas: {fileID: 1757574702}
   backCardPrefab: {fileID: 6393148218707311881, guid: cf41aabef43deda49b5c5f2ba69b4a6c, type: 3}
   gardenButton: {fileID: 1400048443}
-  entryReq: 2
+  entryReq: 5
   gardenBtnText: 'Enter the Garden
 
 '
@@ -682,7 +684,6 @@ MonoBehaviour:
   - {r: 127, g: 17, b: 224, a: 1}
   - {r: 127, g: 17, b: 224, a: 1}
   speed: 1
-  growthSpeed: 1000
 --- !u!114 &1757574704
 MonoBehaviour:
   m_ObjectHideFlags: 0
