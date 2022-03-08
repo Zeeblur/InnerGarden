@@ -8,6 +8,7 @@ public class FlowerSystem : MonoBehaviour
     public GameObject[] soveFlowers = new GameObject[3];
     public GameObject[] loverFlowers = new GameObject[3];
     public GameObject[] MageFlowers = new GameObject[3];
+    public GameObject[] neutralFlowers = new GameObject[3];
 
     // Start is called before the first frame update
     void Start()
