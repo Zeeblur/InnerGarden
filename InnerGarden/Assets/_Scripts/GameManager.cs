@@ -31,12 +31,20 @@ public class GameManager : MonoBehaviour
     public static int gardenCounter { get; private set; }
     public static int gardenVisits { get; private set; }
 
+    private const int k_totalStorylets = 20;
+
+    private Data.StoryLet[] allStories = new Data.StoryLet[k_totalStorylets];
+
+    private List<int> usedStoryIndex = new List<int>();
+
     // Start is called before the first frame update
     void Start()
     {
         gardenCounter = 0;
         gardenVisits = 0;
         print(Screen.currentResolution);
+
+        LoadJson();
     }
 
     // Update is called once per frame
@@ -62,6 +70,50 @@ public class GameManager : MonoBehaviour
         hardcodedStory.answerKey[2] = Data.Archetype.SOVEREIGN;
 
         return hardcodedStory;
+    }
+
+    public static void LoadJson()
+    {
+        // populate all stories array
+        for(int i = 0; i < k_totalStorylets; i++)
+        {
+            Instance.allStories[i] = new Data.StoryLet(); // random data atm TODO switch with data
+            Instance.allStories[i].body = "fgfggf";
+            Instance.allStories[i].cardType = (Narrative.CardType)Random.Range(0, 3);
+        }
+    }
+
+    public static Data.StoryLet[] FetchRandomStories(int count)
+    {
+        // if no stories load them :D
+        if (Instance.allStories[0] == null)
+        {
+            LoadJson();
+        }
+
+        // return array of count stories
+        Data.StoryLet[] chosenStories = new Data.StoryLet[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            // get a random number
+            int rn = Random.Range(0, k_totalStorylets);
+
+            // has it been used already? get another
+            while(Instance.usedStoryIndex.Contains(rn))
+            {
+                rn = Random.Range(0, k_totalStorylets);
+            }
+
+            chosenStories[i] = Instance.allStories[rn];
+
+            // test vars
+            chosenStories[i].body = i.ToString();
+
+            Instance.usedStoryIndex.Add(rn);
+        }
+
+        return chosenStories;
     }
 
     public static void UnlockCondition(string itemName)

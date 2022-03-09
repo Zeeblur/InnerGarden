@@ -15,11 +15,20 @@ namespace Narrative
         MAGICIAN
     }
 
+    public enum CardType
+    {
+        HOBBIES,
+        OUTINGS,
+        SOCIAL, 
+        WORK
+    }
+
     public class StoryLet
     {
         public string body;
         public string[] answers;
         public Archetype[] answerKey;
+        public CardType cardType;
     }
 }
 
@@ -40,7 +49,9 @@ public class GameEvent : MonoBehaviour
     public Transform gardenButton;
     public int entryReq = 5;   // garden entry requirements
 
-    public string gardenBtnText = "Enter the Garden\n (";
+    public Sprite[] cardBackgrounds = new Sprite[4];
+
+    public string gardenBtnText = "Enter The Garden\n (";
 
     public static List<int> availableStorylets;  // lets hope the GameManger can update this for us, so the "event" doesn't need to know anything about the player. 
 
@@ -55,17 +66,19 @@ public class GameEvent : MonoBehaviour
     private Transform chosenStoryTrans;
 
     private Narrative.StoryLet currentStoryLet;
+    private Narrative.StoryLet[] stories;
 
     // vars for UI animation
     private Transform startPosition;
     public float speed = 1.0F;
     private float startTime;
     private float journeyLength;
+    public Transform cardTarget;
 
     // this should tie into the screen/resolution ideally. // TODO
-    private Vector3 gridPosition = new Vector3(500.0f, 500.0f, 0.0f);
+    private Vector3 gridPosition = new Vector3(-200.0f, 200.0f, 0.0f);
     private Vector3 colOffset = new Vector3(250.0f, 0.0f, 0.0f);
-    private Vector3 rowOffset = new Vector3(0.0f, -250.0f, 0.0f);
+    private Vector3 rowOffset = new Vector3(0.0f, -200.0f, 0.0f);
 
     public enum EventStates
     {
@@ -84,10 +97,12 @@ public class GameEvent : MonoBehaviour
 
         cardGOs = new GameObject[k_cardCount];
 
+        stories = GameManager.FetchRandomStories(k_cardCount);
+
         // Will need to instantiate card prefabs here
         for (int i = 0; i < k_cardCount; i++)
         {
-            CreateCard(i);
+            CreateCard(i, stories[i].cardType);
         }
 
         // initialise colours TODO not used currently
@@ -125,7 +140,7 @@ public class GameEvent : MonoBehaviour
         }
     }
 
-    private void CreateCard(int index)
+    private void CreateCard(int index, Narrative.CardType type)
     {
         Transform card = Instantiate(cardPrefab, storyCanvas);
         card.SetParent(storyCanvas);
@@ -141,17 +156,7 @@ public class GameEvent : MonoBehaviour
         cardGOs[index] = card.gameObject;
         cardGOs[index].SetActive(false);
 
-
-        // TODO we probably don't need this part anymore, but can be used to give variation to the card backs. 
-        if (colValue == 1)
-        {
-            int mainArchetype = 2;
-            Button btn = CreateEventCard(card, mainArchetype);
-        }
-        else
-        {
-            Button btn = CreateEventCard(card, 0); // generic
-        }
+        Button btn = CreateEventCard(card, type);      
 
     }
 
@@ -176,12 +181,17 @@ public class GameEvent : MonoBehaviour
     }
 
     // this creates a button handle, assigns the text colour & callback. 
-    public Button CreateEventCard(Transform card, int inputChoice)
+    public Button CreateEventCard(Transform card, Narrative.CardType inputChoice)
     {
+        if(card.GetComponentInChildren<Image>())
+        {
+            card.GetComponentInChildren<Image>().sprite = cardBackgrounds[(int)inputChoice];
+            card.GetComponentInChildren<Image>().color = cardColours[(int)inputChoice];
+        }
+
         if (card.GetComponentInChildren<Text>()) // nullcheck
         {
             card.GetComponentInChildren<Text>().text = (inputChoice).ToString();
-            card.GetComponentInChildren<Image>().color = cardColours[inputChoice];
         }
 
         Button btn = card.GetComponentInChildren<Button>();
@@ -239,7 +249,7 @@ public class GameEvent : MonoBehaviour
         startPosition = chosenStoryTrans;
 
         startTime = Time.time;
-        journeyLength = Vector3.Distance(startPosition.position, storyCanvas.position);
+        journeyLength = Vector3.Distance(startPosition.position, cardTarget.position);
 
         // Update Text
         // this should return a story object that we can use, at the moment I'm returning a string. 
@@ -274,7 +284,7 @@ public class GameEvent : MonoBehaviour
 
         // Set our position as a fraction of the distance between the markers.
         if (chosenStoryTrans)
-            chosenStoryTrans.position = Vector3.Lerp(startPosition.position, storyCanvas.position, fractionOfJourney);
+            chosenStoryTrans.position = Vector3.Lerp(startPosition.position, cardTarget.position, fractionOfJourney);
     }   
 
     // TODO probably don't need this function anymore.
