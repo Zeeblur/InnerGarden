@@ -766,3 +766,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f484559fd2da14c9d11da87bdcc8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storyFile: 
