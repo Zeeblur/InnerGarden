@@ -1,7 +1,7 @@
 [
   {
     "storyletID": 1,
-    "storyletPic": "picHandle",
+    "storyletPic": "WORK",
     "storyletText": "As part of a kick-off seminar with some new clients, you are having lunch with their tech team.\nOne of their developers is currently going on a tangent about how \"obviously homos shouldn't be allowed to have children, they'll raise them to be deviant or criminal\".",
     "storyletOptions": [
       {"optionText": "You icily remind them that hate speech is illegal and that she really should know to keep her backward opionions to herself.", "optionArchetype": "CHAMPION"},
@@ -12,7 +12,7 @@
 
   {
     "storyletID": 2,
-    "storyletPic": "picHandle",
+    "storyletPic": "HOBBIES",
     "storyletText": "You are spending the weekend at your brother's. You are not used to living with children, so you made the mistake of leaving your drawing supplies out after sketching late into the night.\nYou wake up to find your nieces, 5 and 7, giggling over your sketch book, smushing charcoal all over the place.",
     "storyletOptions": [
       {"optionText": "You call their parents to do some damage control. You shouldn't have left everything out, but the kids probably shouldn't be going around unsupervised...", "optionArchetype": "SOVEREIGN"},
@@ -23,7 +23,7 @@
 
   {
     "storyletID": 3,
-    "storyletPic": "picHandle",
+    "storyletPic": "HOBBIES",
     "storyletText": "The non-profit you volunteer for is holding a social gathering tonight, and everyone is supposed to bring food to share.\nYou are, of course, planning to bake a cake, but you need to decide which one.",
     "storyletOptions": [
       {"optionText": "You'll pick a new fancy recipe, to challenge yourself. Maybe cream puffs?", "optionArchetype": "MAGICIAN"},
@@ -34,7 +34,7 @@
 
   {
     "storyletID": 4,
-    "storyletPic": "picHandle",
+    "storyletPic": "SOCIAL",
     "storyletText": "Your brother, the younger one, is getting married. He asked you to join his partner and he on a cake tasting endeavour, since you're the family's pastry expert.\nProblem is, you can't stand the bride. It's cliche, but you find her boring and a stick in the mud. Not that you told your brother that...",
     "storyletOptions": [
       {"optionText": "There's going to be cake, though. A lot of professional fancy cakes, and you'll be able to ask questions. You'll focus on the goods and ignore his partner's uninspired chatter.", "optionArchetype": "MAGICIAN"},
@@ -45,7 +45,7 @@
 
   {
     "storyletID": 5,
-    "storyletPic": "picHandle",
+    "storyletPic": "HOBBIES",
     "storyletText": "It's been some time since you've sorted through your drawings, and sketch books and canson sheets are piling up on the side of your desk.\nYou should go through them, and much harder, decide what to do with them since you don't have room to keep every single drawing you make. Some you'll have to throw away, but what to do with the nicer ones?",
     "storyletOptions": [
       {"optionText": "You keep them, as a reminder of your progress.", "optionArchetype": "MAGICIAN"},
@@ -56,7 +56,7 @@
 
   {
     "storyletID": 6,
-    "storyletPic": "picHandle",
+    "storyletPic": "HOBBIES",
     "storyletText": "You have an unexpected free evening as a conference you wanted to attend has been canceled.\nYou are not particularly tired, so you can take advantage of this time to do something else.",
     "storyletOptions": [
       {"optionText": "You devote a couple of hours to volunteer work, mostly proofreading documents for your collaboration with the City Hall.", "optionArchetype": "CHAMPION"},
@@ -67,7 +67,7 @@
 
   {
     "storyletID": 7,
-    "storyletPic": "picHandle",
+    "storyletPic": "OUTING",
     "storyletText": "You are expected to a friend's birthday party tonight, but you haven't gone out in a while, and you're pretty sure you won't know anyone.\nYour chest tightens just thinking about it and you hear whistling in your ears. It's not an actual panic attack -yet- but you don't think it'd be reasonnable to ignore those warning signs and power through.",
     "storyletOptions": [
       {"optionText": "You call your friend and explain that a party is going to be too much for you, offering to have lunch together in the following days instead.", "optionArchetype": "SOVEREIGN"},
@@ -78,7 +78,7 @@
 
   {
     "storyletID": 8,
-    "storyletPic": "picHandle",
+    "storyletPic": "OUTING",
     "storyletText": "You are walking home from a meeting, past a mess of broken furniture and damp cardboard. A box that seems to be moving by itself catches your attention.\nYou investigate, only to find that someone had taped the box shut with a live kitten inside. Considering the box is otherwise empty, you seriously doubt this was an accident.",
     "storyletOptions": [
       {"optionText": "Look up the nearest shelter to drop the kitten at. You are not equipped to deal with a cat, especially one so young.", "optionArchetype": "SOVEREIGN"},
@@ -89,7 +89,7 @@
 
   {
     "storyletID": 9,
-    "storyletPic": "picHandle",
+    "storyletPic": "SOCIAL",
     "storyletText": "You receive a text message from your brother.\n”Hi sib, Mam's birthday's next month, and I kinda don't have the time right now, you don't mind doing a group gift, right? You always have the best ideas... Just tell me how much I owe you! Ta, Bobby.”\nIt is his third time in a row asking for something like that.",
     "storyletOptions": [
       {"optionText": "You refuse, explaining you’ve planned to gift her one of your drawings and that doesn’t really work for a group gift", "optionArchetype": "MAGICIAN"},
@@ -100,7 +100,7 @@
 
   {
     "storyletID": 10,
-    "storyletPic": "picHandle",
+    "storyletPic": "WORK",
     "storyletText": "The coffee machine at work is growing mould. Again.\nYou grumble about selfish colleagues not doing their share of community chores. More often than not, you end up cleaning the machine even when it’s not your turn on the roster because you dislike the mess.",
     "storyletOptions": [
       {"optionText": "You’d really rather spend time sketching during your break, rather than cleaning up after people, so you decide to go out and buy a French press to keep at your desk.", "optionArchetype": "MAGICIAN"},
@@ -111,7 +111,7 @@
 
   {
     "storyletID": 11,
-    "storyletPic": "picHandle",
+    "storyletPic": "SOCIAL",
     "storyletText": "It’s the end of a harrowing work day, after a gruelling week juggling a touchy deadline at work, your mothers’ grief as they lost a close friend, and a terrible bout of insomnia.\nYou finally have time to unwind, and you sit down on your couch to draw.\nYour phone rings, it’s your best friend. She probably wants to know how you are, and maybe complain a bit about her new roommate.",
     "storyletOptions": [
       {"optionText": "You answer the phone, happy to have someone to unload your troubles on, and bitch equally about disorganised bosses and sloppy roommates.", "optionArchetype": "LOVER"},
@@ -122,8 +122,8 @@
 
   {
     "storyletID": 12,
-    "storyletPic": "picHandle",
-    "storyletText": "You have just finished cleaning up after a great conference held by your non-profit, and you are a bit disappointed that your older brother did not show up. He promised he would, but you had a bit of an argument when you last talked a couple of weeks ago, and it looks more and more like he won’t make the first step and you’ll have to be the one to reach out.",
+    "storyletPic": "SOCIAL",
+    "storyletText": "You have just finished cleaning up after a great conference held by your non-profit, and you are a bit disappointed that your older brother did not show up.\nHe promised he would, but you had a bit of an argument when you last talked a couple of weeks ago, and it looks more and more like he won’t make the first step and you’ll have to be the one to reach out.",
     "storyletOptions": [
       {"optionText": "You’ll call as soon as you get back home. You’re still annoyed at him, but it’s silly for you to ignore each other like children.", "optionArchetype": "LOVER"},
       {"optionText": "You’ll let him stew a bit more before calling him. It hurt that he didn’t come today, and you don’t want to make things too easy for him.", "optionArchetype": "CHAMPION"},
@@ -133,7 +133,7 @@
 
   {
     "storyletID": 13,
-    "storyletPic": "picHandle",
+    "storyletPic": "OUTING",
     "storyletText": "You and your friends are taking advantage of the nice weather to have a picnic. You are just swinging to the shop to pick up food and drinks to share.\nMany other people apparently got the same idea, because the supermarket is teeming with costumers, driving your anxiety up fast. Two of your friends have been bickering over what flavour of crisps to buy for the last ten minutes, and you are not feeling so well.",
     "storyletOptions": [
       {"optionText": "You put an end to the debate by buying both bags of crisps, and steer everyone outside.", "optionArchetype": "CHAMPION"},
@@ -144,7 +144,7 @@
 
   {
     "storyletID": 14,
-    "storyletPic": "picHandle",
+    "storyletPic": "WORK",
     "storyletText": "Tonight’s weekly Volunteers Meeting is quite lively, as you’ve started organising this year’s contribution to CripFest, the local anti-ableist festival. Your group will be holding a DIY workshop for ramps and other accessibility stuff. The team needs volunteers, and it’s always super exciting to be part of a big event. And also exhausting...\nThe head of the group is also calling for volunteers to accompany them to a meeting with the local Board of Education. This would be more your thing than the DIY bit, even if chipping at admin people’s reserves meeting after meeting often feels underwhelming.",
     "storyletOptions": [
       {"optionText": "Join the Board of Education meeting, the groundwork takes time but you know it’s worth it, and you’re good at it.", "optionArchetype": "SOVEREIGN"},
@@ -155,7 +155,7 @@
 
   {
     "storyletID": 15,
-    "storyletPic": "picHandle",
+    "storyletPic": "WORK",
     "storyletText": "It’s that time of the year again... Your co-workers have organised a Secret Santa, where you each pick the name of a colleague from a hat and have to give them a small present. Mug with dubious jokes, cheap stuffed toys, plain chocolate boxes... It’s all about pretending to like the impersonal and underwhelming gifts.\nYour “secret giftee” is Sandra from market analysis. You have never talked to her beyond your standard elevator chit-chat, but you’ve heard she’s on a medical diet, so chocolates are probably out.",
     "storyletOptions": [
       {"optionText": "You decide to recycle the gift you received last year. It’ll probably be obvious, but you warned them secular Christmas was just a consumerist lie destined to trap people in a labour logic and you wanted not part in it.", "optionArchetype": "CHAMPION"},
@@ -166,7 +166,7 @@
 
   {
     "storyletID": 16,
-    "storyletPic": "picHandle",
+    "storyletPic": "social",
     "storyletText": "You’re spending a few days at a friend’s, and they want to show you this new game they are in love with. Problem, it’s a platformer, and requires pressing buttons in quick sequences. You’re not too sure if it’s a result of your executive function deficit or an issue with your motor skills, but games like that have always been a pain to play for you.",
     "storyletOptions": [
       {"optionText": "Your friend isn’t asking you to help them progress in the game, though, they just want to share something that makes them happy. You take the controller and listen to their excited explanations.", "optionArchetype": "LOVER"},
@@ -177,7 +177,7 @@
 
   {
     "storyletID": 17,
-    "storyletPic": "picHandle",
+    "storyletPic": "OUTING",
     "storyletText": "You followed a friend to a speed dating event to keep him company, despite your utter lack of interest in the thing. At least they have decent food...\nYour third “date” has apparently decided to forego the recommended get-to-know-each-other questions because she opens the round asking what is most important to you in life.",
     "storyletOptions": [
       {"optionText": "Self-improvement, because your self is the only thing you can reliably control.", "optionArchetype": "MAGICIAN"},
@@ -188,7 +188,7 @@
 
   {
     "storyletID": 18,
-    "storyletPic": "picHandle",
+    "storyletPic": "WORK",
     "storyletText": "You are involved in an experimental cross-department project at work, but it’s running despairingly late, as people always have more urgent things to take care of for their main team. The deadline is next week, and you are not sure your group can pull it off anymore.",
     "storyletOptions": [
       {"optionText": "You take charge and go around to establish a prioritised list of tasks and a planning that works for everyone. Things should go well as long as everyone sticks to the plan.", "optionArchetype": "SOVEREIGN"},
@@ -199,7 +199,7 @@
 
   {
     "storyletID": 19,
-    "storyletPic": "picHandle",
+    "storyletPic": "OUTING",
     "storyletText": "You are babysitting your niece today, and you have decided to take her to visit the local wildlife reserve. You take a guided tour to learn about the various species and end at the infirmary, where they take care of injured animals and rescues before freeing them back into the wild. Your niece insists on knowing which animal is your favourite.",
     "storyletOptions": [
       {"optionText": "You choose the cranes you have seen on the tour. Many cultures give symbolic importance to cranes, and they are very good subjects for a drawing.", "optionArchetype": "MAGICIAN"},
@@ -210,7 +210,7 @@
 
   {
     "storyletID": 20,
-    "storyletPic": "picHandle",
+    "storyletPic": "HOBBIES",
     "storyletText": "You are watching a live stream of a new video game.\nAs the streamer dives into the menus and reviews the accessibility options, another viewer starts making snide comments about devs ruining the game to accomodate \"weak people\".",
     "storyletOptions": [
       {"optionText": "You draw a quick caricature of a cartoon character throwing a tantrum because the world doesn't revolve around them, and share it on the chat as an answer.", "optionArchetype": "MAGICIAN"},
