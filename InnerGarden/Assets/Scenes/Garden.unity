@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.32896143, g: 0.76129466, b: 0.99777514, a: 1}
+  m_IndirectSpecularColor: {r: 0.32896218, g: 0.7612936, b: 0.99777514, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -815,7 +815,7 @@ MonoBehaviour:
   - {fileID: 6990921481601419693, guid: 626dfb9145bbe5e4d9d9fd874a7bb565, type: 3}
   - {fileID: 7694312361154410044, guid: 9fc058b209f531941b6ee149c0ea5a5f, type: 3}
   - {fileID: 3719997696010007607, guid: 3d9f80c09ca18aa439cd253cba547991, type: 3}
-  MageFlowers:
+  mageFlowers:
   - {fileID: 7597201710633878760, guid: 67afa85cdc10d08418e2091b48a50067, type: 3}
   - {fileID: 4487201668678077784, guid: 963355c228474524482e50ccdeb5fb80, type: 3}
   - {fileID: 6688444143474493857, guid: 4cb5af7c90d2540458bbe4719bd4b938, type: 3}
@@ -942,6 +942,36 @@ Transform:
   - {fileID: 761975537}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1038281139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1038281140}
+  m_Layer: 0
+  m_Name: Grass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1038281140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038281139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7087793, y: 2.364802, z: 3.7981157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1059976345
 PrefabInstance:
@@ -1537,15 +1567,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1168071221505968878, guid: ab4cc9a857933f74dae4009f151740de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.730413
+      value: -2.508
       objectReference: {fileID: 0}
     - target: {fileID: 1168071221505968878, guid: ab4cc9a857933f74dae4009f151740de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.151
       objectReference: {fileID: 0}
     - target: {fileID: 1168071221505968878, guid: ab4cc9a857933f74dae4009f151740de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2953482
+      value: -1.878
       objectReference: {fileID: 0}
     - target: {fileID: 1168071221505968878, guid: ab4cc9a857933f74dae4009f151740de, type: 3}
       propertyPath: m_LocalRotation.w

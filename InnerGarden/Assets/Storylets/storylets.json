@@ -166,7 +166,7 @@
 
   {
     "storyletID": 16,
-    "storyletPic": "social",
+    "storyletPic": "SOCIAL",
     "storyletText": "You’re spending a few days at a friend’s, and they want to show you this new game they are in love with. Problem, it’s a platformer, and requires pressing buttons in quick sequences. You’re not too sure if it’s a result of your executive function deficit or an issue with your motor skills, but games like that have always been a pain to play for you.",
     "storyletOptions": [
       {"optionText": "Your friend isn’t asking you to help them progress in the game, though, they just want to share something that makes them happy. You take the controller and listen to their excited explanations.", "optionArchetype": "LOVER"},

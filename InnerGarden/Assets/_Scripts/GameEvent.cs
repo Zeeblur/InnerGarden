@@ -17,7 +17,7 @@ namespace Narrative
     public enum CardType
     {
         HOBBIES,
-        OUTINGS,
+        OUTING,
         SOCIAL, 
         WORK
     }

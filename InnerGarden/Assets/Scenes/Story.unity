@@ -737,7 +737,7 @@ MonoBehaviour:
   storyCanvas: {fileID: 1757574702}
   backCardPrefab: {fileID: 6393148218707311881, guid: cf41aabef43deda49b5c5f2ba69b4a6c, type: 3}
   gardenButton: {fileID: 1400048443}
-  entryReq: 2
+  entryReq: 5
   cardBackgrounds:
   - {fileID: 21300000, guid: ae69e7aedaf05a341a730faa8988d25d, type: 3}
   - {fileID: 21300000, guid: 59f9af3b07036784494f87ddf0e5559e, type: 3}
@@ -766,4 +766,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f484559fd2da14c9d11da87bdcc8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyFile: 
