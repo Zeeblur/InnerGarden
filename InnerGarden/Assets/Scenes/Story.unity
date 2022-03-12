@@ -259,6 +259,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &673397930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673397931}
+  m_Layer: 5
+  m_Name: CardTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &673397931
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673397930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1757574702}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 174}
+  m_SizeDelta: {x: 100, y: 104.2}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1200077947
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -445,11 +480,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 350
+      value: 360.2
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 90
+      value: 85.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -481,11 +520,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 250
+      value: 359
       objectReference: {fileID: 0}
     - target: {fileID: 2908492247760979255, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -505,9 +544,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5091624368261784263, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_Text
-      value: 'Enter the Garden
+      value: 'Enter The Garden
 
         (0/5)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091624368261784263, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091624368261784263, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091624368261784263, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091624368261784263, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091624368261784263, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5405783543515785112, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
       propertyPath: m_Enabled
@@ -545,6 +604,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6295827932293574901, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f637826b50ff0fc4baab4395747cab0e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3366521835c96ca4faef5d4dc519400a, type: 3}
 --- !u!224 &1400048443 stripped
@@ -602,12 +665,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -645,6 +708,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 673397931}
   - {fileID: 1400048443}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -666,14 +730,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28776a8fde6766f4c8a8e60a5af78593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  k_cardCount: 12
+  k_cardCount: 9
   gridSize: 3
   currentState: 0
-  cardPrefab: {fileID: 6393148218707311881, guid: f2d848c3724cb49479940509a6993102, type: 3}
+  cardPrefab: {fileID: 7845751336769857196, guid: 77e5071caabe972479907e7bcba654a8, type: 3}
   storyCanvas: {fileID: 1757574702}
   backCardPrefab: {fileID: 6393148218707311881, guid: cf41aabef43deda49b5c5f2ba69b4a6c, type: 3}
   gardenButton: {fileID: 1400048443}
   entryReq: 5
+  cardBackgrounds:
+  - {fileID: 21300000, guid: ae69e7aedaf05a341a730faa8988d25d, type: 3}
+  - {fileID: 21300000, guid: 59f9af3b07036784494f87ddf0e5559e, type: 3}
+  - {fileID: 21300000, guid: e5900bc682963af4baaaf32cc2f34c08, type: 3}
+  - {fileID: 21300000, guid: 3626ca41b55a6ec4592f205744e64e0f, type: 3}
   gardenBtnText: 'Enter the Garden
 
 '
@@ -684,6 +753,7 @@ MonoBehaviour:
   - {r: 127, g: 17, b: 224, a: 1}
   - {r: 127, g: 17, b: 224, a: 1}
   speed: 1
+  cardTarget: {fileID: 673397931}
 --- !u!114 &1757574704
 MonoBehaviour:
   m_ObjectHideFlags: 0

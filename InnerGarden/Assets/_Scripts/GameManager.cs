@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Data = Narrative;
+using Data;
+using Narrative;
 
 
 
@@ -31,12 +32,19 @@ public class GameManager : MonoBehaviour
     public static int gardenCounter { get; private set; }
     public static int gardenVisits { get; private set; }
 
+    private const int k_totalStorylets = 20;
+
+    private Narrative.StoryLet[] allStories = new Narrative.StoryLet[k_totalStorylets];
+
+    private List<int> usedStoryIndex = new List<int>();
+
     // Start is called before the first frame update
     void Start()
     {
         gardenCounter = 0;
         gardenVisits = 0;
         print(Screen.currentResolution);
+        LoadJson();
     }
 
     // Update is called once per frame
@@ -46,9 +54,9 @@ public class GameManager : MonoBehaviour
     }
 
     // TODO: changed from string to real type from JSON
-    public static Data.StoryLet GetStory()
+    public static Narrative.StoryLet GetStory()
     {
-        Data.StoryLet hardcodedStory = new Data.StoryLet();
+        Narrative.StoryLet hardcodedStory = new Narrative.StoryLet();
         hardcodedStory.body = "You’re spending a few days at a friend’s, and they want to show you this new game they are in love with. Problem, it’s a platformer, and requires pressing buttons in quick sequences. You’re not too sure if it’s a result of your executive function deficit or an issue with your motor skills, but games like that have always been a pain to play for you.";
 
         hardcodedStory.answers = new string[3];
@@ -56,12 +64,83 @@ public class GameManager : MonoBehaviour
         hardcodedStory.answers[1] = "You decline playing yourself, but tell them you’ll gladly watch them play. You sneak in a couple sketches of their lively demonstration, earning yourself a few indulgent glances.";
         hardcodedStory.answers[2] = "You explain how platformers tend to be a struggle for you, and ask if you can keep the play session quick. Maybe you could play some strategy coop game afterwards, since we both enjoy them?";
 
-        hardcodedStory.answerKey = new Data.Archetype[3];
-        hardcodedStory.answerKey[0] = Data.Archetype.LOVER;
-        hardcodedStory.answerKey[1] = Data.Archetype.MAGICIAN;
-        hardcodedStory.answerKey[2] = Data.Archetype.SOVEREIGN;
+        hardcodedStory.answerKey = new Narrative.Archetype[3];
+        hardcodedStory.answerKey[0] = Narrative.Archetype.LOVER;
+        hardcodedStory.answerKey[1] = Narrative.Archetype.MAGICIAN;
+        hardcodedStory.answerKey[2] = Narrative.Archetype.SOVEREIGN;
 
         return hardcodedStory;
+    }
+
+    public static void LoadJson()
+    {
+        StoryletReader.RootObject root = StoryletReader.ReadData();
+
+        print(root.stories[0].storyletText);
+
+        // populate all stories array
+        for(int i = 0; i < k_totalStorylets; i++)
+        {
+            Instance.allStories[i] = new Narrative.StoryLet();
+            Instance.allStories[i].body = root.stories[i].storyletText;
+
+            int optLen = root.stories[i].storyletOptions.Length;
+            Instance.allStories[i].answers = new string[optLen];
+            Instance.allStories[i].answerKey = new Narrative.Archetype[optLen];
+            for (int j = 0; j < optLen; j++)
+            {
+                Instance.allStories[i].answers[j] = root.stories[i].storyletOptions[j].optionText;
+
+                try
+                {
+                    Instance.allStories[i].answerKey[j] = (Narrative.Archetype)System.Enum.Parse(typeof(Narrative.Archetype), root.stories[i].storyletOptions[j].optionArchetype);
+                }
+                catch
+                {
+                    Debug.Log("Warning: archetype not recognised for storylet: " + root.stories[i].storyletID + " Option: " + j);
+                }
+            }
+
+            try
+            {
+                Instance.allStories[i].cardType = (Narrative.CardType)System.Enum.Parse(typeof(Narrative.CardType), root.stories[i].storyletPic);
+            }
+            catch
+            {
+                Debug.Log("Warning: storyletPic not recognised for storylet: " + root.stories[i].storyletID);
+            }
+
+        }
+    }
+
+    public static Narrative.StoryLet[] FetchRandomStories(int count)
+    {
+        // if no stories load them :D
+        if (Instance.allStories[0] == null)
+        {
+            LoadJson();
+        }
+
+        // return array of count stories
+        Narrative.StoryLet[] chosenStories = new Narrative.StoryLet[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            // get a random number
+            int rn = Random.Range(0, k_totalStorylets);
+
+            // has it been used already? get another
+            while(Instance.usedStoryIndex.Contains(rn))
+            {
+                rn = Random.Range(0, k_totalStorylets);
+            }
+
+            chosenStories[i] = Instance.allStories[rn];
+
+            Instance.usedStoryIndex.Add(rn);
+        }
+
+        return chosenStories;
     }
 
     public static void UnlockCondition(string itemName)
@@ -69,7 +148,7 @@ public class GameManager : MonoBehaviour
         // This should be called when a player has a special unlock. e.g Cat.
     }
 
-    public static void IncreaseScore(Data.Archetype inA)
+    public static void IncreaseScore(Narrative.Archetype inA)
     {
         Instance.m_scores[((int)inA)]++;
         gardenCounter++;
@@ -87,7 +166,7 @@ public class GameManager : MonoBehaviour
 
         for (uint i = 0; i < Instance.m_scores.Length; ++i)
         {
-            totals += ((Data.Archetype)i).ToString() + ": " + Instance.m_scores[i] + "\n";
+            totals += ((Narrative.Archetype)i).ToString() + ": " + Instance.m_scores[i] + "\n";
         }
       
         Debug.Log("You have the scores: " + totals);

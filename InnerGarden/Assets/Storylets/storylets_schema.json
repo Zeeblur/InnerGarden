@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storylet",
+  "description": "Definition of a storylet",
+  "type": "object",
+  "properties": {
+
+    "storyletID": {
+      "description": "The unique identifier for the storylet",
+      "type": "integer"
+    },
+    "storyletPic": {
+      "description": "Handle of the storylet illustration",
+      "type": "string"
+    },
+    "storyletIf": {
+      "description": "Requirements for the storylet to be open",
+      "type": "array",
+      "items": { "$ref": "#/$defs/condition" }
+    },
+    "storyletText": {
+      "description": "The main text of the storylet",
+      "type": "string",
+      "maxLength": 500
+    },
+    "storyletOptions": {
+      "description": "The storylet options",
+      "type": "array",
+      "items": { "$ref": "#/$defs/option" }
+    },
+    "storyletComment" : {
+      "description": "Comment - Any non-gameplay info about the storylet",
+      "type": "string"
+    }
+  },
+
+  "required": [ "storyletID" , "storyletCat", "storyletText", "storyletIf", "storyletOptions"],
+
+  "$defs": {
+    "option": {
+      "description": "An option for a storylet",
+      "type": "object",
+      "properties": {
+        "optionText": {
+          "description": "The text of the option",
+          "type": "string",
+          "maxLength": 280
+        },
+        "optionArchetype": {
+          "description": "The archetype associated with the option, will increase if the option is chosen",
+          "type": "string",
+          "enum": ["sovereign", "champion", "lover", "magician"]
+        }
+      },
+
+      "required": ["optionText", "optionArchetype"]
+    },
+
+    "condition": {
+      "description": "A condition for a storylet",
+      "type": "object",
+      "properties": {
+        "variable": {
+          "description": "The variable to be checked",
+          "type": "string"
+        },
+        "compType": {
+          "description": "The type of comparison",
+          "type": "string",
+          "enum": ["IS", "IS NOT", "GREATER THAN", "LESSER THAN"]
+        },
+        "compValue": {
+          "description": "The value to compare the variable with",
+          "type": ["string", "integer", "boolean"]
+        }
+      },
+      "required": ["variable", "compType", "compValue"]
+    }
+  }
+}
