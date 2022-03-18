@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.32896218, g: 0.7612936, b: 0.99777514, a: 1}
+  m_IndirectSpecularColor: {r: 0.32896143, g: 0.76129466, b: 0.99777514, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5846,6 +5846,13 @@ MonoBehaviour:
   - {fileID: 6990921481601419693, guid: 626dfb9145bbe5e4d9d9fd874a7bb565, type: 3}
   - {fileID: 7694312361154410044, guid: 9fc058b209f531941b6ee149c0ea5a5f, type: 3}
   - {fileID: 3719997696010007607, guid: 3d9f80c09ca18aa439cd253cba547991, type: 3}
+  - {fileID: 6810675867524522522, guid: c5339131d591af5499b58202f41a7b3b, type: 3}
+  - {fileID: 5573554660281072098, guid: e1e87cf46f466f047bbc547482cb7ab3, type: 3}
+  - {fileID: 129092111608078957, guid: f98db7198947f2645b81d81e198a2549, type: 3}
+  - {fileID: 2684050315465661869, guid: 456918fe78120934281437245e0ad2b5, type: 3}
+  - {fileID: 7132407151917200960, guid: c75e71ed94338154082458c355703847, type: 3}
+  - {fileID: 2754847970656035971, guid: aff6c262c303903419ad62b3ff47c112, type: 3}
+  - {fileID: 5329066972887627578, guid: fa26781ee99bbd948bb1965bbae950f9, type: 3}
   mageFlowers:
   - {fileID: 7597201710633878760, guid: 67afa85cdc10d08418e2091b48a50067, type: 3}
   - {fileID: 4487201668678077784, guid: 963355c228474524482e50ccdeb5fb80, type: 3}
@@ -5877,6 +5884,7 @@ MonoBehaviour:
   - {fileID: 397529994192151992, guid: 917ae8ee251e5064fb1b9f61f39403dc, type: 3}
   - {fileID: 1981023337652424788, guid: ab4cc9a857933f74dae4009f151740de, type: 3}
   - {fileID: 1240129598174340312, guid: 788b5c9536b7a7b4e88bf64251b20cd4, type: 3}
+  unassignedFlowers: []
   grassPrefab: {fileID: 1943154286}
   instances: 500
   radius: 6
