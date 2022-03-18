@@ -13,7 +13,7 @@ public class FlowerSpawner : MonoBehaviour
     private int prevCount;
     private int prevRadius;
     private Transform prevPos;
-    private List<GameObject> spawned;
+    public List<GameObject> spawned;
 
     // Start is called before the first frame update
     void Start()
@@ -50,15 +50,18 @@ public class FlowerSpawner : MonoBehaviour
     {
         prevPos = circleTrans;
         prevCount = count;
-        for (int j = 1; j <= count; j++)
+        for (int j = 1; j <= count; ++j)
         {
-            for (int i = 0; i < flowerObjects.Length; i++)
+            for (int i = 0; i < flowerObjects.Length; ++i)
             {
                 prevRadius = radius;
                 Transform t = Instantiate(flowerObjects[i].transform);
                 Vector3 instanceLoc = Random.insideUnitCircle * radius;
                 t.localPosition = circleTrans.position + new Vector3(instanceLoc.x, 0.0f, instanceLoc.y);
                 t.SetParent(transform);
+                Quaternion initialRot = t.localRotation;
+                float randomAngle = Random.Range(0, 360);
+                t.localRotation = initialRot *Quaternion.Euler(0, randomAngle, 0);
                 spawned.Add(t.gameObject);
             }
         }
