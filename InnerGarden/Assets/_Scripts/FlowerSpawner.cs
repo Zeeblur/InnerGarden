@@ -19,6 +19,7 @@ public class FlowerSpawner : MonoBehaviour
 
 
     public bool affectedByScore = true;
+    private bool prevCheck = true;
     public float scoreModifier = 2.0f;
     private float prevScoreMod = 0.0f;
     public uint[] flowerScores = { 0, 0, 4, 0 };
@@ -49,7 +50,8 @@ public class FlowerSpawner : MonoBehaviour
         circleTrans = this.transform.GetChild(0);
         flowerScores = GameManager.GetScores();
 
-        if (prevCount != count || prevRadius != radius || prevPos != circleTrans || prevScores != flowerScores || scoreModifier != prevScoreMod)
+        if (prevCount != count || prevRadius != radius || prevPos != circleTrans 
+            || prevScores != flowerScores || scoreModifier != prevScoreMod || prevCheck != affectedByScore)
         {
             DeleteAll();
             Redraw();
@@ -74,6 +76,7 @@ public class FlowerSpawner : MonoBehaviour
         prevCount = count;
         prevScores = flowerScores;
         prevScoreMod = scoreModifier;
+        prevCheck = affectedByScore;
 
         uint drawScore = 0;
         long totalDS = 1;
@@ -95,14 +98,24 @@ public class FlowerSpawner : MonoBehaviour
                         continue;
                     }
                     print(" yip");
+                    // lower end of drawscore check
+                    if (i < drawScore)
+                    {
+                        // totalDrawScore is upper bounds of modifier
+                        totalDS = drawScore / flowerObjects.Length;
+                        print("drawing : " + totalDS + " " + drawScore + " " + i + flowerObjects[i]);
+                        Transform t = Instantiate(flowerObjects[i].transform);
+                        Vector3 instanceLoc = Random.insideUnitCircle * radius;
+                        t.localPosition = circleTrans.position + new Vector3(instanceLoc.x, 0.0f, instanceLoc.y);
+                        t.SetParent(transform);
+                        Quaternion initialRot = t.localRotation;
+                        float randomAngle = Random.Range(0, 360);
+                        t.localRotation = initialRot * Quaternion.Euler(0, randomAngle, 0);
+                        spawned.Add(t.gameObject);
+                    }
                 }
-
-                // lower end of drawscore check
-                if (i < drawScore)
+                else
                 {
-                    // totalDrawScore is upper bounds of modifier
-                    totalDS = drawScore / flowerObjects.Length;
-                    print("drawing : "+ totalDS + " " + drawScore +" "+ i + flowerObjects[i]);
                     Transform t = Instantiate(flowerObjects[i].transform);
                     Vector3 instanceLoc = Random.insideUnitCircle * radius;
                     t.localPosition = circleTrans.position + new Vector3(instanceLoc.x, 0.0f, instanceLoc.y);
@@ -112,7 +125,9 @@ public class FlowerSpawner : MonoBehaviour
                     t.localRotation = initialRot * Quaternion.Euler(0, randomAngle, 0);
                     spawned.Add(t.gameObject);
                 }
-                
+
+
+
             }
         }
     }
