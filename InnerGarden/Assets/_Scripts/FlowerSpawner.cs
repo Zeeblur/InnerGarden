@@ -24,8 +24,8 @@ public class FlowerSpawner : MonoBehaviour
     private float prevScoreMod = 0.0f;
     public uint[] flowerScores = { 0, 0, 4, 0 };
     private uint[] prevScores = new uint[4];
-    
-    
+
+    public bool needUpdate = false;
 
 
     // Start is called before the first frame update
@@ -51,7 +51,8 @@ public class FlowerSpawner : MonoBehaviour
         flowerScores = GameManager.GetScores();
 
         if (prevCount != count || prevRadius != radius || prevPos != circleTrans 
-            || prevScores != flowerScores || scoreModifier != prevScoreMod || prevCheck != affectedByScore)
+            || prevScores != flowerScores || scoreModifier != prevScoreMod
+            || prevCheck != affectedByScore || needUpdate)
         {
             DeleteAll();
             Redraw();
@@ -72,9 +73,10 @@ public class FlowerSpawner : MonoBehaviour
         if (!gameObject.activeSelf)
             return;
 
+        needUpdate = false;
         prevPos = circleTrans;
         prevCount = count;
-        prevScores = flowerScores;
+        prevScores = GameManager.GetScores();
         prevScoreMod = scoreModifier;
         prevCheck = affectedByScore;
 

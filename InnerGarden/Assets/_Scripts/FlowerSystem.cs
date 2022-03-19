@@ -43,12 +43,38 @@ public class FlowerSystem : MonoBehaviour
 
         GetStats();
         // PrintUnassigned();
+
+        ActivateGarden();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void ActivateGarden()
+    {
+        int stage = GameManager.gardenCounter;
+        print("Stage: " + stage);
+
+        if (stage==0)
+        {
+            // We want TestGarden4
+            gardenSpawners[3].SetActive(true);
+        }
+        else if (stage == 1)
+        {
+            // just for testing TODO score
+            gardenSpawners[1].SetActive(true);
+        }
+        else if (stage == 3)
+        {
+            gardenSpawners[3].SetActive(false);
+            gardenSpawners[1].SetActive(false);
+
+            gardenSpawners[2].SetActive(true);
+        }
     }
 
     void GetStats()

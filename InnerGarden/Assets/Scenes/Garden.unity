@@ -492,8 +492,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
@@ -1092,8 +1112,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
@@ -2642,8 +2682,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
@@ -3742,8 +3802,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
@@ -4514,8 +4594,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
@@ -5942,7 +6042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f484559fd2da14c9d11da87bdcc8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scores: 00000000000000000000000000000000
+  scores: 00000000000000000100000000000000
 --- !u!4 &850059734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2303651954685507416, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
@@ -7821,8 +7921,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
@@ -7917,7 +8037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1154683034
 Transform:
   m_ObjectHideFlags: 0
@@ -9123,8 +9243,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
@@ -10742,8 +10882,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: scoreModifier
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
+      propertyPath: flowerScores.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303651954685507415, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
       propertyPath: flowerObjects.Array.data[0]
