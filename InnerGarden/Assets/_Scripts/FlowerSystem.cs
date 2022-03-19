@@ -12,7 +12,7 @@ public class FlowerSystem : MonoBehaviour
     public List<GameObject> neutralFlowers = new List<GameObject>();
     public List<GameObject> unassignedFlowers = new List<GameObject>();
 
-    private string[] catNames = { "champ", "sover", "lover", "mage", "neutral", "unass" };
+    private string[] catNames = { "CHAMPION", "SOVEREIGN", "LOVER", "MAGICIAN", "NEUTRAL", "unass" };
 
     public Transform grassPrefab;
     public int instances = 500;
@@ -22,8 +22,7 @@ public class FlowerSystem : MonoBehaviour
 
     private FlowerSpawner[] spawners; 
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //intialise the category lists
         categories[0] = champFlowers;
@@ -43,7 +42,7 @@ public class FlowerSystem : MonoBehaviour
         }
 
         GetStats();
-        PrintUnassigned();
+        // PrintUnassigned();
     }
 
     // Update is called once per frame
@@ -68,13 +67,17 @@ public class FlowerSystem : MonoBehaviour
                 {
                     bool found = false;
 
-                    // which category does the plant belong to? 
+                    // which of 5 category does the plant belong to? 
                     for (int i = 0; i < categories.Length - 1; ++i)
                     {
                         if (categories[i].Contains(go))
                         {
+                            // set the flower archetype in the map on the spawner
+                            fs.AddFlowerMap(go, catNames[i]);
                             ++totalInArchetype[i];
+                            
                             found = true;
+
                             break;
                         }
                     }

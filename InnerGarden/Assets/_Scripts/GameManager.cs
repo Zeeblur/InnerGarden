@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // We don't have a player atm so just leaving "scores" here as a set of ints.
-    private int[] m_scores = new int[4] { 0, 0, 0, 0 };
+    private uint[] m_scores = new uint[4] { 0, 0, 0, 0 };
+
+    public uint[] scores = new uint[4];
 
     // read only counters for if available to get into garden
     public static int gardenCounter { get; private set; }
@@ -50,7 +51,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // easy cheat
+        Instance.m_scores = scores;
     }
 
     // TODO: changed from string to real type from JSON
@@ -171,4 +173,15 @@ public class GameManager : MonoBehaviour
       
         Debug.Log("You have the scores: " + totals);
     }
+
+    public static uint[] GetScores()
+    {
+        return Instance.m_scores;
+    }
+
+    //public static Narrative.Archetype ConvertNameToType()
+    //{
+
+    //}
+
 }

@@ -1,19 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Narrative;
 
 public class FlowerSpawner : MonoBehaviour
 {
     public int count = 1;
-    public int radius = 5; 
+    public float radius = 5;
     public GameObject[] flowerObjects = new GameObject[3];
+    public Dictionary<GameObject, string> flowerMap = new Dictionary<GameObject, string>();
 
     private Transform circleTrans;
 
     private int prevCount;
-    private int prevRadius;
+    private float prevRadius;
     private Transform prevPos;
     public List<GameObject> spawned;
+
+
+    public bool affectedByScore = true;
+    public float scoreModifier = 2.0f;
+    private float prevScoreMod = 0.0f;
+    public uint[] flowerScores = { 0, 0, 4, 0 };
+    private uint[] prevScores = new uint[4];
+    
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,16 +34,22 @@ public class FlowerSpawner : MonoBehaviour
         prevPos = circleTrans;
         spawned = new List<GameObject>();
 
-        Redraw();
+        GameManager.PrintScores();
+        flowerScores = GameManager.GetScores();
 
+        prevScoreMod = scoreModifier;
+        prevScores = flowerScores;
+
+        Redraw();
     }
 
     // Update is called once per frame
     void Update()
     {
         circleTrans = this.transform.GetChild(0);
+        flowerScores = GameManager.GetScores();
 
-        if (prevCount != count || prevRadius != radius || prevPos != circleTrans)
+        if (prevCount != count || prevRadius != radius || prevPos != circleTrans || prevScores != flowerScores || scoreModifier != prevScoreMod)
         {
             DeleteAll();
             Redraw();
@@ -44,26 +62,97 @@ public class FlowerSpawner : MonoBehaviour
         {
             Destroy(go);
         }
+        spawned.Clear();
     }
 
     void Redraw()
     {
+        if (!gameObject.activeSelf)
+            return;
+
         prevPos = circleTrans;
         prevCount = count;
-        for (int j = 1; j <= count; ++j)
+        prevScores = flowerScores;
+        prevScoreMod = scoreModifier;
+
+        uint drawScore = 0;
+        long totalDS = 1;
+        for (int j = 1; j <= count * totalDS; ++j)
         {
+
             for (int i = 0; i < flowerObjects.Length; ++i)
             {
+                // this at the moment is for each flower attached to the zones it'll use 
                 prevRadius = radius;
-                Transform t = Instantiate(flowerObjects[i].transform);
-                Vector3 instanceLoc = Random.insideUnitCircle * radius;
-                t.localPosition = circleTrans.position + new Vector3(instanceLoc.x, 0.0f, instanceLoc.y);
-                t.SetParent(transform);
-                Quaternion initialRot = t.localRotation;
-                float randomAngle = Random.Range(0, 360);
-                t.localRotation = initialRot *Quaternion.Euler(0, randomAngle, 0);
-                spawned.Add(t.gameObject);
+
+                if (affectedByScore)
+                {
+                // Do we plant? 
+                    drawScore = GenerateModifier(i);
+                    if (drawScore == 0)
+                    {
+                        print(" nope");
+                        continue;
+                    }
+                    print(" yip");
+                }
+
+                // lower end of drawscore check
+                if (i < drawScore)
+                {
+                    // totalDrawScore is upper bounds of modifier
+                    totalDS = drawScore / flowerObjects.Length;
+                    print("drawing : "+ totalDS + " " + drawScore +" "+ i + flowerObjects[i]);
+                    Transform t = Instantiate(flowerObjects[i].transform);
+                    Vector3 instanceLoc = Random.insideUnitCircle * radius;
+                    t.localPosition = circleTrans.position + new Vector3(instanceLoc.x, 0.0f, instanceLoc.y);
+                    t.SetParent(transform);
+                    Quaternion initialRot = t.localRotation;
+                    float randomAngle = Random.Range(0, 360);
+                    t.localRotation = initialRot * Quaternion.Euler(0, randomAngle, 0);
+                    spawned.Add(t.gameObject);
+                }
+                
             }
         }
+    }
+
+    uint GenerateModifier(int index)
+    {
+        // returns true/false if we want to spawn object
+        if (flowerMap.ContainsKey(flowerObjects[index]))
+        {
+            // match to score
+            var flowerIndex = System.Enum.Parse(typeof(Narrative.Archetype), flowerMap[flowerObjects[index]].ToString());
+            int cArch = (int)flowerIndex;
+
+            if (cArch < 4)
+            {
+                print(flowerScores[cArch]);
+
+                // waht's that score for 
+                print(flowerMap[flowerObjects[index]].ToString());
+
+                print("score is: " + flowerScores[(int)flowerIndex]);
+                if (flowerScores[(int)flowerIndex] > 0)
+                {
+                    return (uint)flowerScores[(int)flowerIndex] * (uint)scoreModifier;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+        else
+        {
+            return 0;
+        }
+        return 0;
+    }
+
+    public void AddFlowerMap(GameObject inGO, string inArch)
+    {
+        flowerMap.Add(inGO, inArch);
     }
 }
