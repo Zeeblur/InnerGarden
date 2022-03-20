@@ -8,7 +8,7 @@ Shader "Custom/Waves"
 
         // Waves
         _Direction("Direction", Vector) = (1.0,0.0,0.0,1.0)
-        _Steepness("Steepness", Range(0.1, 1.0)) = 0.5
+        _Steepness("Steepness", Range(0.001, 1.0)) = 0.5
         _Freq("Frequency", Range (1.0, 10.0)) = 1.0
     }
     SubShader
