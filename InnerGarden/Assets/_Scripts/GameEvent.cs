@@ -76,8 +76,8 @@ public class GameEvent : MonoBehaviour
 
     // this should tie into the screen/resolution ideally. // TODO card prefab width & height
     private Vector3 gridPosition = new Vector3(0.0f, 200.0f, 0.0f);
-    private Vector3 colOffset = new Vector3(200.0f, 0.0f, 0.0f);
-    private Vector3 rowOffset = new Vector3(0.0f, -50.0f, 0.0f);
+    private Vector3 colOffset = new Vector3(50.0f, 0.0f, 0.0f);
+    private Vector3 rowOffset = new Vector3(0.0f, -70.0f, 0.0f);
 
     public enum EventStates
     {
@@ -98,7 +98,7 @@ public class GameEvent : MonoBehaviour
         gridPosition = new Vector3(-(gridWidth / 2), 200.0f, 0.0f);
 
         colOffset.x = cardWidth + cardGap;
-        rowOffset.y = -(cardHeight + (cardGap/2));
+        rowOffset.y = -(cardHeight + (2*cardGap));
 
     }
 

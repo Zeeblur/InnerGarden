@@ -733,7 +733,7 @@ MonoBehaviour:
   k_cardCount: 9
   gridSize: 3
   currentState: 0
-  cardPrefab: {fileID: 7845751336769857196, guid: 77e5071caabe972479907e7bcba654a8, type: 3}
+  cardPrefab: {fileID: 7845751336769857196, guid: e08d54d852f52534baa362cc3db9be50, type: 3}
   storyCanvas: {fileID: 1757574702}
   backCardPrefab: {fileID: 6393148218707311881, guid: cf41aabef43deda49b5c5f2ba69b4a6c, type: 3}
   gardenButton: {fileID: 1400048443}
@@ -766,3 +766,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f484559fd2da14c9d11da87bdcc8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scores: 00000000000000000000000000000000
