@@ -74,10 +74,10 @@ public class GameEvent : MonoBehaviour
     private float journeyLength;
     public Transform cardTarget;
 
-    // this should tie into the screen/resolution ideally. // TODO
-    private Vector3 gridPosition = new Vector3(-200.0f, 200.0f, 0.0f);
-    private Vector3 colOffset = new Vector3(250.0f, 0.0f, 0.0f);
-    private Vector3 rowOffset = new Vector3(0.0f, -200.0f, 0.0f);
+    // this should tie into the screen/resolution ideally. // TODO card prefab width & height
+    private Vector3 gridPosition = new Vector3(0.0f, 200.0f, 0.0f);
+    private Vector3 colOffset = new Vector3(200.0f, 0.0f, 0.0f);
+    private Vector3 rowOffset = new Vector3(0.0f, -50.0f, 0.0f);
 
     public enum EventStates
     {
@@ -87,12 +87,29 @@ public class GameEvent : MonoBehaviour
         CONCLUSION
     }
 
+    void InitialiseGrid()
+    {
+        RectTransform cardRT = cardPrefab.GetComponent<RectTransform>();
+        float cardWidth = cardRT.sizeDelta.x;
+        float cardHeight = cardRT.sizeDelta.y;
+        float cardGap = colOffset.x;
+
+        float gridWidth = (cardWidth * gridSize) + cardGap;
+        gridPosition = new Vector3(-(gridWidth / 2), 200.0f, 0.0f);
+
+        colOffset.x = cardWidth + cardGap;
+        rowOffset.y = -(cardHeight + (cardGap/2));
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         currentState = EventStates.INTRO;
         
         Random.InitState(seed);
+
+        InitialiseGrid();
 
         cardGOs = new GameObject[k_cardCount];
 
@@ -269,6 +286,15 @@ public class GameEvent : MonoBehaviour
             cardBtns[i+1].onClick.AddListener(delegate { OptionChosen(currentStoryLet.answerKey[idx]); });
         }
 
+        // adjust the UI to fit the text
+       //cardText.height;
+
+        TextGenerator textGen = new TextGenerator();
+        TextGenerationSettings generationSettings = cardText.GetGenerationSettings(cardText.rectTransform.rect.size);
+        float width = textGen.GetPreferredWidth(cardText.text, generationSettings);
+        float height = textGen.GetPreferredHeight(cardText.text, generationSettings);
+        
+        print(width + " " +height);
         return chosenStoryTrans.gameObject;
 
     }
