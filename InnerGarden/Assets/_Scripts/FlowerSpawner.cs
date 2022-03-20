@@ -24,6 +24,8 @@ public class FlowerSpawner : MonoBehaviour
     private float prevScoreMod = 0.0f;
     public uint[] flowerScores = { 0, 0, 4, 0 };
     private uint[] prevScores = new uint[4];
+    // try unlinking by using a list
+    //private List<unit> prevScores = new List<uint>();
 
     public bool needUpdate = false;
 
@@ -39,7 +41,11 @@ public class FlowerSpawner : MonoBehaviour
         flowerScores = GameManager.GetScores();
 
         prevScoreMod = scoreModifier;
-        prevScores = flowerScores;
+
+        for (uint i = 0; i < flowerScores.Length; ++i)
+        {
+            prevScores[i] = (uint)flowerScores.GetValue(i);
+        }
 
         Redraw();
     }
@@ -50,9 +56,21 @@ public class FlowerSpawner : MonoBehaviour
         circleTrans = this.transform.GetChild(0);
         flowerScores = GameManager.GetScores();
 
-        if (prevCount != count || prevRadius != radius || prevPos != circleTrans 
-            || prevScores != flowerScores || scoreModifier != prevScoreMod
-            || prevCheck != affectedByScore || needUpdate)
+        // check score
+        for (uint i = 0; i < flowerScores.Length; ++i)
+        {
+            if (flowerScores[i] != prevScores[i])
+            {
+                needUpdate = true;
+                break;
+            }
+        }
+
+
+        if (prevCount != count || prevRadius != radius || prevPos != circleTrans
+            || scoreModifier != prevScoreMod
+            || prevCheck != affectedByScore
+            || needUpdate)
         {
             DeleteAll();
             Redraw();
@@ -70,13 +88,20 @@ public class FlowerSpawner : MonoBehaviour
 
     void Redraw()
     {
+        print("Redraw");
         if (!gameObject.activeSelf)
             return;
 
         needUpdate = false;
         prevPos = circleTrans;
         prevCount = count;
-        prevScores = GameManager.GetScores();
+
+        // have to do this to pass by value
+        for (uint i = 0; i < flowerScores.Length; ++i)
+        {
+            prevScores[i] = (uint)flowerScores.GetValue(i);
+        }
+
         prevScoreMod = scoreModifier;
         prevCheck = affectedByScore;
 
@@ -140,9 +165,15 @@ public class FlowerSpawner : MonoBehaviour
         if (flowerMap.ContainsKey(flowerObjects[index]))
         {
             // match to score
-            var flowerIndex = System.Enum.Parse(typeof(Narrative.Archetype), flowerMap[flowerObjects[index]].ToString());
-            int cArch = (int)flowerIndex;
+            Narrative.Archetype flowerIndex;
+            int cArch = 4; // default is neutral
+            if (System.Enum.TryParse<Narrative.Archetype>(flowerMap[flowerObjects[index]].ToString(), out flowerIndex))
+            {
+                // set to specific
+                cArch = (int)flowerIndex;
+            }
 
+            
             if (cArch < 4)
             {
                 print(flowerScores[cArch]);
