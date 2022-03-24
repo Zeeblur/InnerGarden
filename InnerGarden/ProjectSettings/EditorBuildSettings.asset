@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Story.unity
     guid: b88f7b8ea6107ac46862c4627bb703dc
   - enabled: 1
-    path: Assets/Scenes/GrassTest.unity
-    guid: ebd5f88e63f13d448aacfc801222404c
+    path: Assets/Scenes/Garden.unity
+    guid: e6fc29eaa3cec654ea6752338bef33f3
   m_configObjects: {}

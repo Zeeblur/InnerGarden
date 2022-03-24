@@ -56,14 +56,15 @@ public class FlowerSystem : MonoBehaviour
     void ActivateGarden()
     {
         int stage = GameManager.gardenCounter;
+        stage /= 5;
         print("Stage: " + stage);
 
-        if (stage==0)
+        if (stage==1)
         {
             // We want TestGarden4
             gardenSpawners[3].SetActive(true);
         }
-        else if (stage == 1)
+        else if (stage == 2)
         {
             // just for testing TODO score
             gardenSpawners[1].SetActive(true);

@@ -39,6 +39,13 @@ public class GameManager : MonoBehaviour
 
     private List<int> usedStoryIndex = new List<int>();
 
+    public static float UIScale;
+
+    void OnEnable()
+    {
+        UIScale = PlayerPrefs.GetFloat("UIScale");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
