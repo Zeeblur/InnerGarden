@@ -41,7 +41,7 @@ public class GameEvent : MonoBehaviour
     public int k_cardCount = 9;
     public int gridSize = 3;
 
-    public EventStates currentState;
+    public static EventStates currentState;
     public Transform cardPrefab;
     public Transform storyCanvas;
     public Transform backCardPrefab;
@@ -73,6 +73,8 @@ public class GameEvent : MonoBehaviour
     private float startTime;
     private float journeyLength;
     public Transform cardTarget;
+    public Transform cardPanel;
+    public OptionsMenu menu;
 
     // this should tie into the screen/resolution ideally. // TODO card prefab width & height
     private Vector3 gridPosition = new Vector3(0.0f, 200.0f, 0.0f);
@@ -84,7 +86,7 @@ public class GameEvent : MonoBehaviour
         INTRO,
         EVENTCHOICE,
         NARRATIVECHOICE,
-        CONCLUSION
+        OPTIONS
     }
 
     void InitialiseGrid()
@@ -135,7 +137,6 @@ public class GameEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         switch (currentState)
         {
             case EventStates.INTRO:
@@ -144,20 +145,23 @@ public class GameEvent : MonoBehaviour
                 break;
             case EventStates.EVENTCHOICE:
                 // present the choice to the player and accept input
-                ShowCards();
+                ShowCards(true);
                 break;
             case EventStates.NARRATIVECHOICE:
                 DisplayNarrativeChoices();
                 break;
-            case EventStates.CONCLUSION:
+            case EventStates.OPTIONS:
+                // hide cards then show the options menu
+                ShowCards(false);
+                menu.OptionsOpen();
                 break;
         }
     }
 
     private void CreateCard(int index)
     {
-        Transform card = Instantiate(cardPrefab, storyCanvas);
-        card.SetParent(storyCanvas);
+        Transform card = Instantiate(cardPrefab, cardPanel);
+        card.SetParent(cardPanel);
         card.position += gridPosition;
 
         int colValue = index % gridSize;
@@ -185,12 +189,12 @@ public class GameEvent : MonoBehaviour
         }
     }
 
-    public void ShowCards()
+    public void ShowCards(bool show)
     {
         foreach (GameObject go in cardGOs)
         {
             if (go)
-                go.SetActive(true);
+                go.SetActive(show);
         }
     }
 
@@ -295,6 +299,9 @@ public class GameEvent : MonoBehaviour
         float height = textGen.GetPreferredHeight(cardText.text, generationSettings);
         
         print(width + " " +height);
+
+        // add to options hide panel
+        menu.otherObjects.Add(chosenStoryTrans.gameObject);
         return chosenStoryTrans.gameObject;
 
     }
@@ -310,6 +317,16 @@ public class GameEvent : MonoBehaviour
         if (chosenStoryTrans)
             chosenStoryTrans.position = Vector3.Lerp(startPosition.position, cardTarget.position, fractionOfJourney);
     }   
+
+    public static void ChangeEventState(EventStates inE)
+    {
+        currentState = inE;
+    }
+
+    public static EventStates GetEventState()
+    {
+        return currentState;
+    }
 
     // TODO probably don't need this function anymore.
     void DestroyAllCards()

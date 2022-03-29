@@ -9,7 +9,7 @@ namespace Data
     {
         public static RootObject ReadData()
         {
-            string filePath = Application.dataPath + "/Storylets/storylets.json";
+            string filePath = Application.dataPath + "/StreamingAssets/storylets.json";
             string jsonString = File.ReadAllText(filePath);
 
             RootObject theStories = JsonUtility.FromJson<RootObject>("{\"stories\":" + jsonString + "}");

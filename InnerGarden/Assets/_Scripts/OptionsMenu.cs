@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     public GameObject optionsPanel;
-    public GameObject[] otherObjects;
+    public List<GameObject> otherObjects;
 
     public Dropdown resDropdown;
 
@@ -18,36 +18,56 @@ public class OptionsMenu : MonoBehaviour
     
     public Vector2 initialRefResolution;
     public Vector2 currentRefRes;
-    public Vector2 currentRes;
 
     // SavedPlayerSettings
     public float UIScale = 1.0f;
+    public Vector2 referenceRes;
+    public bool fsToggle;
+    public Vector2 currentRes;
 
     void OnEnable()
     {
         UIScale = PlayerPrefs.GetFloat("UIScale");
+        referenceRes = new Vector2(PlayerPrefs.GetFloat("RefRes_X"), PlayerPrefs.GetFloat("RefRes_Y"));
+        fsToggle = PlayerPrefs.GetInt("IsFullscreen") == 1 ? true : false;
+        currentRes = new Vector2(PlayerPrefs.GetFloat("CurRes_X"), PlayerPrefs.GetFloat("CurRes_Y"));
     }
 
     void OnDisable()
     {
+        print("Options says OnDisable");
         PlayerPrefs.SetFloat("UIScale", UIScale);
+        PlayerPrefs.SetFloat("RefRes_X", referenceRes.x);
+        PlayerPrefs.SetFloat("RefRes_Y", referenceRes.y);
+        PlayerPrefs.SetInt("IsFullscreen", fsToggle ? 1 : 0);
+        PlayerPrefs.SetFloat("CurRes_X", currentRes.x);
+        PlayerPrefs.SetFloat("CurRes_Y", currentRes.y);
     }
 
     void Start()
     {
         resolutions = Screen.resolutions;
+        currentRes = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+
         resDropdown.ClearOptions();
 
         List<string> dropData = new List<string>();
-        foreach (Resolution res in resolutions)
+        int currentResIdx = 0;
+        for (int i = 0; i < resolutions.Length; ++i)
         {
-            print(res.ToString());
-            dropData.Add(res.ToString());
+            print(resolutions[i].ToString());
+            dropData.Add(resolutions[i].ToString());
+
+            if (resolutions[i].width == currentRes.x && resolutions[i].height == currentRes.y)
+            {
+                currentResIdx = i;
+            }
+                
         }
         resDropdown.AddOptions(dropData);
+        resDropdown.value = currentResIdx;
 
         initialRefResolution = canvasScaler.referenceResolution;
-        currentRes = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
     }
 
     public void OptionsOpen()
@@ -58,23 +78,19 @@ public class OptionsMenu : MonoBehaviour
         ShowOthers(false);
     }
 
-    public void Update()
-    {
-        //RectTransform rt = optionsPanel.GetComponent<RectTransform>();
-        //print(rt.localPosition);
-    }
-
     public void OptionsClose()
     {
         optionsPanel.SetActive(false);
         ShowOthers(true);
+        GameManager.Resume();
     }
 
     public void ShowOthers(bool toHide)
     {
         foreach (GameObject go in otherObjects)
         {
-            go.SetActive(toHide);
+            if (go)
+               go.SetActive(toHide);
         }
     }
 
@@ -86,11 +102,13 @@ public class OptionsMenu : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+        fsToggle = isFullscreen; // save to prefs
     }
 
-    public void SetResolution()
+    public void SetResolution(int resIdx)
     {
-
+        Resolution res = resolutions[resIdx];
+        Screen.SetResolution(res.width, res.height, Screen.fullScreen);
     }
 
     public void SetUIScale(float input)
@@ -99,5 +117,6 @@ public class OptionsMenu : MonoBehaviour
         print(input);
         currentRefRes = initialRefResolution / UIScale;
         canvasScaler.referenceResolution = currentRefRes;
+        referenceRes = currentRefRes;
     }
 }

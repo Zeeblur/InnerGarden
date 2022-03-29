@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Data;
 using Narrative;
-
-
 
 public class GameManager : MonoBehaviour
 {
@@ -40,10 +39,28 @@ public class GameManager : MonoBehaviour
     private List<int> usedStoryIndex = new List<int>();
 
     public static float UIScale;
+    public static GameEvent.EventStates prevES;
+    public static bool optionsOpen = false;
+    public static Vector2 referenceRes;
+    public static Vector2 currentRes;
+    public static CanvasScaler cScaler;
+    public static bool fullScreen = false;
 
     void OnEnable()
     {
+        print("GM says OnEnable");
         UIScale = PlayerPrefs.GetFloat("UIScale");
+        referenceRes = new Vector2(PlayerPrefs.GetFloat("RefRes_X"), PlayerPrefs.GetFloat("RefRes_Y"));
+
+        // update canvas scaler with player pref
+        cScaler = Instance.gameObject.GetComponent<CanvasScaler>();
+        if(cScaler)
+            cScaler.referenceResolution = referenceRes * UIScale;
+
+        fullScreen = PlayerPrefs.GetInt("IsFullscreen") == 1 ? true : false;
+        Screen.fullScreen = fullScreen;
+        currentRes = new Vector2(PlayerPrefs.GetFloat("CurRes_X"), PlayerPrefs.GetFloat("CurRes_Y"));
+        Screen.SetResolution((int)currentRes.x, (int)currentRes.y, Screen.fullScreen);
     }
 
     // Start is called before the first frame update
@@ -60,6 +77,25 @@ public class GameManager : MonoBehaviour
     {
         // easy cheat
         Instance.m_scores = scores;
+
+        // Check for keyboard inputs
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Q))
+        {
+            if (!optionsOpen)
+            {
+                print("Flip State options");
+                optionsOpen = true;
+                prevES = GameEvent.GetEventState();
+                GameEvent.ChangeEventState(GameEvent.EventStates.OPTIONS);
+            }
+        }
+    }
+
+    public static void Resume()
+    {
+        // resume last event state
+        GameEvent.ChangeEventState(prevES);
+        optionsOpen = false;
     }
 
     // TODO: changed from string to real type from JSON

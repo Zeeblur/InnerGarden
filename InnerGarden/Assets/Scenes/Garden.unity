@@ -5919,7 +5919,6 @@ GameObject:
   m_Component:
   - component: {fileID: 849542111}
   - component: {fileID: 849542112}
-  - component: {fileID: 849542113}
   m_Layer: 0
   m_Name: FlowerSystem
   m_TagString: Untagged
@@ -6030,19 +6029,6 @@ MonoBehaviour:
   - {fileID: 247487034}
   - {fileID: 2004528515}
   - {fileID: 1154683033}
---- !u!114 &849542113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 849542110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f484559fd2da14c9d11da87bdcc8bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scores: 00000000000000000100000000000000
 --- !u!4 &850059734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2303651954685507416, guid: c5938f9a2e02db249b012aa0862edd1f, type: 3}
@@ -8362,6 +8348,7 @@ GameObject:
   - component: {fileID: 1224969210}
   - component: {fileID: 1224969209}
   - component: {fileID: 1224969213}
+  - component: {fileID: 1224969214}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8462,6 +8449,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1224969214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224969208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f484559fd2da14c9d11da87bdcc8bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scores: 00000000000000000000000000000000
 --- !u!1001 &1229232460
 PrefabInstance:
   m_ObjectHideFlags: 0
