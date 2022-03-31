@@ -49,18 +49,18 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         print("GM says OnEnable");
-        UIScale = PlayerPrefs.GetFloat("UIScale");
-        referenceRes = new Vector2(PlayerPrefs.GetFloat("RefRes_X"), PlayerPrefs.GetFloat("RefRes_Y"));
+ //       UIScale = PlayerPrefs.GetFloat("UIScale");
+ //       referenceRes = new Vector2(PlayerPrefs.GetFloat("RefRes_X"), PlayerPrefs.GetFloat("RefRes_Y"));
 
         // update canvas scaler with player pref
         cScaler = Instance.gameObject.GetComponent<CanvasScaler>();
-        if(cScaler)
-            cScaler.referenceResolution = referenceRes * UIScale;
+ //       if(cScaler)
+   //         cScaler.referenceResolution = referenceRes * UIScale;
 
         fullScreen = PlayerPrefs.GetInt("IsFullscreen") == 1 ? true : false;
         Screen.fullScreen = fullScreen;
-        currentRes = new Vector2(PlayerPrefs.GetFloat("CurRes_X"), PlayerPrefs.GetFloat("CurRes_Y"));
-        Screen.SetResolution((int)currentRes.x, (int)currentRes.y, Screen.fullScreen);
+  //      currentRes = new Vector2(PlayerPrefs.GetFloat("CurRes_X"), PlayerPrefs.GetFloat("CurRes_Y"));
+ //       Screen.SetResolution((int)currentRes.x, (int)currentRes.y, Screen.fullScreen);
     }
 
     // Start is called before the first frame update
