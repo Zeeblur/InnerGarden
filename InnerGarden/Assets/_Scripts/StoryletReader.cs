@@ -14,7 +14,7 @@ namespace Data
         // lets run it in start and hope it's back in time?
         void Awake()
         {
-#if UNITY_WEBGL //&& !UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
             Debug.Log("Wooooo i can't read files");
             GameManager.Instance.StartCoroutine(GetRequest(filePath, (value =>
             {
@@ -59,7 +59,7 @@ namespace Data
         {
             string jsonString = "";
 
-#if UNITY_WEBGL 
+#if UNITY_WEBGL && !UNITY_EDITOR
             Debug.Log(jsonStringRead);
             jsonString = jsonStringRead;
 #else

@@ -15,12 +15,15 @@ public class FlowerSystem : MonoBehaviour
     private string[] catNames = { "CHAMPION", "SOVEREIGN", "LOVER", "MAGICIAN", "NEUTRAL", "unass" };
 
     public Transform grassPrefab;
-    public int instances = 500;
+    public int instances = 250;
     public float radius = 5f;
+
+    public int gardenIndex = 1;
+    private int stage = 0;
 
     public GameObject[] gardenSpawners = new GameObject[4];
 
-    private FlowerSpawner[] spawners; 
+    private FlowerSpawner[] spawners;
 
     void Awake()
     {
@@ -32,8 +35,15 @@ public class FlowerSystem : MonoBehaviour
         categories[4] = neutralFlowers;
         categories[5] = unassignedFlowers;
 
+        stage = GameManager.gardenCounter;
+        stage /= 5;
+        print("Stage: " + stage);
+
+        if (stage == 0)
+            stage = 1;
+
         // draw the grass
-        for (int i = 0; i < instances; ++i)
+        for (int i = 0; i < instances * stage; ++i)
         {
             Transform t = Instantiate(grassPrefab);
             Vector3 instanceLoc = Random.insideUnitCircle * radius;
@@ -55,19 +65,49 @@ public class FlowerSystem : MonoBehaviour
 
     void ActivateGarden()
     {
-        int stage = GameManager.gardenCounter;
-        stage /= 5;
-        print("Stage: " + stage);
+        
 
-        if (stage==1)
+        
+
+        if (stage==1 || stage==0)
         {
             // We want TestGarden4
             gardenSpawners[3].SetActive(true);
+            gardenIndex = 3;
+
+            // whats your highest score?
+            uint[] scores = GameManager.GetScores();
+
+            uint highestScore = 0;
+            int hsIndex = 0;
+            for (int i = 0; i < scores.Length; ++i)
+            {
+                if (scores[i] > highestScore)
+                {
+                    highestScore = scores[i];
+                    hsIndex = i;
+                }
+                    
+            }
+
+            print("High score: "+ (Narrative.Archetype)hsIndex + highestScore);
+
+            // for the spawner in garden 4 we want to switch the flowers to the highest scoring one. 
+            FlowerSpawner[] currentSpawners = gardenSpawners[3].GetComponentsInChildren<FlowerSpawner>();
+            foreach (FlowerSpawner fs in currentSpawners)
+            {
+                if ((Narrative.Archetype)hsIndex == Narrative.Archetype.MAGICIAN)
+                { 
+                    fs.count = 5;
+                }
+                fs.ChangeFlowerType((Narrative.Archetype)hsIndex, categories[hsIndex]);
+            }
         }
         else if (stage == 2)
         {
             // just for testing TODO score
             gardenSpawners[1].SetActive(true);
+            gardenIndex = 1;
         }
         else if (stage == 3)
         {
@@ -75,6 +115,7 @@ public class FlowerSystem : MonoBehaviour
             gardenSpawners[1].SetActive(false);
 
             gardenSpawners[2].SetActive(true);
+            gardenIndex = 2;
         }
     }
 

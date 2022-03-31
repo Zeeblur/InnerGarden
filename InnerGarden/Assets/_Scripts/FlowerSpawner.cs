@@ -16,16 +16,15 @@ public class FlowerSpawner : MonoBehaviour
     private float prevRadius;
     private Transform prevPos;
     public List<GameObject> spawned;
-
+    public Vector3 epsilon;
 
     public bool affectedByScore = true;
+    public bool dominantMod = false;
     private bool prevCheck = true;
     public float scoreModifier = 2.0f;
     private float prevScoreMod = 0.0f;
     public uint[] flowerScores = { 0, 0, 4, 0 };
     private uint[] prevScores = new uint[4];
-    // try unlinking by using a list
-    //private List<unit> prevScores = new List<uint>();
 
     public bool needUpdate = false;
 
@@ -155,6 +154,80 @@ public class FlowerSpawner : MonoBehaviour
 
 
 
+            }
+        }
+
+        ShuffleOverlaps();
+    }
+
+    bool Intersects(Vector3 vecA, Vector3 vecB)
+    {
+        if (vecA.x <= (vecB.x + epsilon.x) || vecA.x >= (vecB.x - epsilon.x)
+            || vecA.z <= (vecB.z + epsilon.z) || vecA.z >= (vecB.z - epsilon.z))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    void ShuffleOverlaps()
+    {
+        // for each of the current spawned flowers, if it's ontop of another, shift it. 
+        int shiftNum = 0; 
+        for(int i = 0; i < spawned.Count - 1; ++i)
+        {
+            if (Intersects(spawned[i].transform.position, spawned[i+1].transform.position))
+            {
+                shiftNum++;
+
+                if (shiftNum > 3)
+                    shiftNum = 0;
+
+                switch (shiftNum)
+                {
+                    case 0:
+                        spawned[i + 1].transform.position += epsilon;
+                        break;
+                    case 1:
+                        spawned[i + 1].transform.position -= epsilon;
+                        break;
+                    case 2:
+                        spawned[i + 1].transform.position += new Vector3(epsilon.x, epsilon.y, -epsilon.z);
+                        break;
+                    case 3:
+                        spawned[i + 1].transform.position += new Vector3(-epsilon.x, epsilon.y, epsilon.z);
+                        break;                    
+                }
+            }
+        }
+       
+    }
+
+    public void ChangeFlowerType(Narrative.Archetype domArch, List<GameObject> inFlowers)
+    {
+        if (!dominantMod)
+            return;
+
+        int usedIdx = 0;
+
+        // for the flowers that don't match the archetype, change them to a random one. 
+        // alter flowerObjects, delete then respawn. 
+        for(int i =0; i < flowerObjects.Length; ++i)
+        {
+            Narrative.Archetype result;
+            if (System.Enum.TryParse<Narrative.Archetype>(flowerMap[flowerObjects[i]], out result))
+            {
+                if (result != domArch)
+                {
+                    print("ohno");
+                    ++usedIdx;
+                    if (usedIdx >= inFlowers.Count)
+                    {
+                        usedIdx = 0; 
+                    }
+                    flowerObjects[i] = inFlowers[usedIdx];
+                    
+                }   
             }
         }
     }

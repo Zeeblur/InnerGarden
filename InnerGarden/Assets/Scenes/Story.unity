@@ -278,9 +278,10 @@ MonoBehaviour:
   scaleSlider: {fileID: 965959379}
   initialRefResolution: {x: 0, y: 0}
   currentRefRes: {x: 0, y: 0}
-  currentRes: {x: 0, y: 0}
   UIScale: 1
   referenceRes: {x: 0, y: 0}
+  fsToggle: 0
+  currentRes: {x: 0, y: 0}
 --- !u!1 &574403657
 GameObject:
   m_ObjectHideFlags: 0

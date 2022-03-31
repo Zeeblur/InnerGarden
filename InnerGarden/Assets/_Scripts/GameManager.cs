@@ -59,13 +59,28 @@ public class GameManager : MonoBehaviour
 
         fullScreen = PlayerPrefs.GetInt("IsFullscreen") == 1 ? true : false;
         Screen.fullScreen = fullScreen;
-  //      currentRes = new Vector2(PlayerPrefs.GetFloat("CurRes_X"), PlayerPrefs.GetFloat("CurRes_Y"));
- //       Screen.SetResolution((int)currentRes.x, (int)currentRes.y, Screen.fullScreen);
+        //      currentRes = new Vector2(PlayerPrefs.GetFloat("CurRes_X"), PlayerPrefs.GetFloat("CurRes_Y"));
+        //       Screen.SetResolution((int)currentRes.x, (int)currentRes.y, Screen.fullScreen);
+
+        // get scores
+        for (int i = 0; i < m_scores.Length; ++i)
+        {
+            Instance.m_scores[i] = (uint)PlayerPrefs.GetInt("Score_" + i);
+        }
+    }
+
+    void OnDisable()
+    {
+        for (uint i = 0; i < m_scores.Length; ++i)
+        {
+            PlayerPrefs.SetInt("Score_" + i, (int)Instance.m_scores[i]);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        //m_scores = new uint[4] { 0, 0, 0, 0 }; // uncomment to reset
         gardenCounter = 0;
         gardenVisits = 0;
         print(Screen.currentResolution);
@@ -76,7 +91,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // easy cheat
-        Instance.m_scores = scores;
+        //Instance.m_scores = scores;
 
         // Check for keyboard inputs
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Q))
