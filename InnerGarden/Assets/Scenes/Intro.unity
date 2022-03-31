@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 464303889}
   - component: {fileID: 464303890}
   - component: {fileID: 464303891}
+  - component: {fileID: 464303892}
   m_Layer: 0
   m_Name: sceneController
   m_TagString: Untagged
@@ -560,9 +561,10 @@ MonoBehaviour:
   scaleSlider: {fileID: 229607395}
   initialRefResolution: {x: 0, y: 0}
   currentRefRes: {x: 0, y: 0}
-  currentRes: {x: 0, y: 0}
   UIScale: 1
   referenceRes: {x: 0, y: 0}
+  fsToggle: 0
+  currentRes: {x: 0, y: 0}
 --- !u!114 &464303891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +575,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 885c5a92ac6e19f42a3ba319286455f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &464303892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464303886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99808cd2e3afc645acdfdd85f3b58c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &574403657
