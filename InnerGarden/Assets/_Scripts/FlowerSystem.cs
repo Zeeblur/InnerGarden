@@ -92,15 +92,18 @@ public class FlowerSystem : MonoBehaviour
 
             print("High score: "+ (Narrative.Archetype)hsIndex + highestScore);
 
-            // for the spawner in garden 4 we want to switch the flowers to the highest scoring one. 
-            FlowerSpawner[] currentSpawners = gardenSpawners[3].GetComponentsInChildren<FlowerSpawner>();
-            foreach (FlowerSpawner fs in currentSpawners)
+            if (highestScore > 0)
             {
-                if ((Narrative.Archetype)hsIndex == Narrative.Archetype.MAGICIAN)
-                { 
-                    fs.count = 5;
+                // for the spawner in garden 4 we want to switch the flowers to the highest scoring one. 
+                FlowerSpawner[] currentSpawners = gardenSpawners[3].GetComponentsInChildren<FlowerSpawner>();
+                foreach (FlowerSpawner fs in currentSpawners)
+                {
+                    if ((Narrative.Archetype)hsIndex == Narrative.Archetype.MAGICIAN)
+                    {
+                        fs.count = 5; // magician looks sparse so bump out a bit
+                    }
+                    fs.ChangeFlowerType((Narrative.Archetype)hsIndex, categories[hsIndex]);
                 }
-                fs.ChangeFlowerType((Narrative.Archetype)hsIndex, categories[hsIndex]);
             }
         }
         else if (stage == 2)

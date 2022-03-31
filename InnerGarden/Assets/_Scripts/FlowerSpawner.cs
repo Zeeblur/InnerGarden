@@ -230,6 +230,8 @@ public class FlowerSpawner : MonoBehaviour
                 }   
             }
         }
+
+        needUpdate = true;
     }
 
     uint GenerateModifier(int index)
@@ -263,6 +265,10 @@ public class FlowerSpawner : MonoBehaviour
                 {
                     return 0;
                 }
+            }
+            else if (cArch == 4)
+            {
+                return 10 * (uint)scoreModifier;
             }
         }
         else
