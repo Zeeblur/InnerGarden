@@ -205,6 +205,8 @@ public class FlowerSpawner : MonoBehaviour
 
     public void ChangeFlowerType(Narrative.Archetype domArch, List<GameObject> inFlowers)
     {
+        print(domArch);
+        print(inFlowers);
         if (!dominantMod)
             return;
 

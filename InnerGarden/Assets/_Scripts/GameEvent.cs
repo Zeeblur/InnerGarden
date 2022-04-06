@@ -246,9 +246,11 @@ public class GameEvent : MonoBehaviour
         Destroy(chosenStory);
         currentState = EventStates.EVENTCHOICE;
 
-        gardenButton.GetComponentInChildren<Text>().text = gardenBtnText + "(" + GameManager.gardenCounter + "/" + entryReq + ")";
+        int cardCounter = GameManager.gardenCounter - (entryReq * GameManager.gardenVisits);
 
-        if (GameManager.gardenCounter == entryReq)
+        gardenButton.GetComponentInChildren<Text>().text = gardenBtnText + "(" + cardCounter + "/" + entryReq + ")";
+
+        if (cardCounter == entryReq)
         {
             GameManager.PrintScores();
             gardenButton.GetComponent<Button>().interactable = true;

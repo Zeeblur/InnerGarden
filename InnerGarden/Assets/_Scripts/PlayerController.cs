@@ -45,10 +45,11 @@ public class PlayerController : MonoBehaviour
         {
             storyPrompt.alpha = 1;
             
-            if (Input.GetKeyDown(KeyCode.Space))
+            // any key except mouse
+            if (Input.anyKey && !(Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2)))
             {
                 GameManager.LeaveGarden();
-                Debug.Log("Space let's go");
+                Debug.Log("Leaving Garden");
             }
         }
     }

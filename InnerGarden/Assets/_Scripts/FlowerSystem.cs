@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,16 +38,18 @@ public class FlowerSystem : MonoBehaviour
 
         stage = GameManager.gardenCounter;
         stage /= 5;
+        print("Counter: " + GameManager.gardenCounter);
         print("Stage: " + stage);
+        print("G: " + GameManager.gardenVisits);
 
         if (stage == 0)
-            stage = 1;
+            stage = 2;
 
         // draw the grass
         for (int i = 0; i < instances * stage; ++i)
         {
             Transform t = Instantiate(grassPrefab);
-            Vector3 instanceLoc = Random.insideUnitCircle * radius;
+            Vector3 instanceLoc = UnityEngine.Random.insideUnitCircle * radius;
             t.localPosition = new Vector3(instanceLoc.x, 0.0f, instanceLoc.y);
             t.SetParent(transform);
         }
@@ -63,34 +66,91 @@ public class FlowerSystem : MonoBehaviour
         
     }
 
-    void ActivateGarden()
+    public struct Rank : IComparable<Rank>
     {
+        public int location;
+        public uint score;
+        public Rank(int inLoc, uint inScore)
+        {
+            location = inLoc;
+            score = inScore;
+        }
+
+        public int CompareTo(Rank other)
+        {
+            if (this.score < other.score)
+            {
+                return 1;
+            }
+            else if (this.score > other.score)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+    }
+
+    List<Rank> GetRank(uint[] input)
+    {
+        // rank them 
+        List<Rank> prevHScoreIdx = new List<Rank>();
+        uint highestScore = 0;
+        int hsIndex = 0;
+        for (int i = 0; i < input.Length; ++i)
+        {
+
+            Rank rk = new Rank(i, input[i]);
+            prevHScoreIdx.Add(rk);
+
+            if (input[i] > highestScore)
+            {
+                highestScore = input[i];
+                hsIndex = i;
+
+
+            }
+
+        }
+
+        prevHScoreIdx.Sort();
+        
         
 
-        
+        foreach (Rank r in prevHScoreIdx)
+        {
+            print((Narrative.Archetype)r.location);
+        }
+        return prevHScoreIdx;
+    }
+
+    void ActivateGarden()
+    {
+        // whats your highest score?
+        uint[] scores = GameManager.GetScores();
+
+        uint highestScore = 0;
+        int hsIndex = 0;
+        for (int i = 0; i < scores.Length; ++i)
+        {
+            if (scores[i] > highestScore)
+            {
+                highestScore = scores[i];
+                hsIndex = i;
+            }
+
+        }
+
+        print("High score: " + (Narrative.Archetype)hsIndex + highestScore);
 
         if (stage==1 || stage==0)
         {
             // We want TestGarden4
             gardenSpawners[3].SetActive(true);
-            gardenIndex = 3;
-
-            // whats your highest score?
-            uint[] scores = GameManager.GetScores();
-
-            uint highestScore = 0;
-            int hsIndex = 0;
-            for (int i = 0; i < scores.Length; ++i)
-            {
-                if (scores[i] > highestScore)
-                {
-                    highestScore = scores[i];
-                    hsIndex = i;
-                }
-                    
-            }
-
-            print("High score: "+ (Narrative.Archetype)hsIndex + highestScore);
+            gardenIndex = 3;            
 
             if (highestScore > 0)
             {
@@ -109,8 +169,108 @@ public class FlowerSystem : MonoBehaviour
         else if (stage == 2)
         {
             // just for testing TODO score
+
+            // test input 3 1 3 4
+            uint[] scoresIn = { 3, 1, 3, 4 };
+
+            // pink blue white none? 
+         // if lover is highest score use this
+
             gardenSpawners[1].SetActive(true);
             gardenIndex = 1;
+
+            // if lover is high keep white as is
+
+
+            // sub the pink layer for secondary pink scorer (orignial Sovereign)
+            // who's higehst sovern/magician?
+            FlowerSpawner[] garden2Spawners = gardenSpawners[1].GetComponentsInChildren<FlowerSpawner>();
+
+            List<FlowerSpawner> pinkSpawns = new List<FlowerSpawner>();
+            List<FlowerSpawner> blueSpawns = new List<FlowerSpawner>();
+            List<FlowerSpawner> whiteSpawns = new List<FlowerSpawner>();
+            
+            foreach(FlowerSpawner fs in garden2Spawners)
+            {
+                if (fs.transform.parent.name == "subPink")
+                {
+                    pinkSpawns.Add(fs);
+                }
+                else if (fs.transform.parent.name == "subBlue")
+                {
+                    blueSpawns.Add(fs);
+                }
+                else if (fs.transform.parent.name == "subWhite")
+                {
+                    whiteSpawns.Add(fs);
+                }
+            }
+
+            List<Rank> ranking = GetRank(scoresIn);
+
+            foreach(FlowerSpawner fSpawn in pinkSpawns)
+            {
+                // change the flowers into ranking[0](archetype) pink's flower.
+                Rank rank = ranking[0];
+
+                print(categories[rank.location]);
+
+
+                List<GameObject> inFlowers = new List<GameObject>();
+                foreach (GameObject go in categories[rank.location])
+                {
+                    print(go.name);
+                    if (go.name.Contains("P") && !go.name.Contains("Pu"))
+                    {
+                        inFlowers.Add(go);
+                        print("P found");
+                    }
+                }
+
+                fSpawn.ChangeFlowerType((Narrative.Archetype)rank.location, inFlowers);
+            }
+
+            // blue
+            foreach (FlowerSpawner fSpawn in blueSpawns)
+            {
+                // change the flowers into ranking[1](archetype) blues flower.
+                Rank rank = ranking[1];
+
+                print(categories[rank.location]);
+
+
+                List<GameObject> inFlowers = new List<GameObject>();
+                foreach (GameObject go in categories[rank.location])
+                {
+                    if (go.name.Contains("Blu"))
+                    {
+                        inFlowers.Add(go);
+                        print("Blue found");
+                    }
+                }
+
+                fSpawn.ChangeFlowerType((Narrative.Archetype)rank.location, inFlowers);
+            }
+
+            // white
+            foreach (FlowerSpawner fSpawn in whiteSpawns)
+            {
+                // change the flowers into ranking[2](archetype) white flower.
+                Rank rank = ranking[2];
+
+                List<GameObject> inFlowers = new List<GameObject>();
+                foreach (GameObject go in categories[rank.location])
+                {
+                    if (go.name.Contains("W"))
+                    {
+                        inFlowers.Add(go);
+                        print("White found");
+                    }
+                }
+
+                fSpawn.ChangeFlowerType((Narrative.Archetype)rank.location, inFlowers);
+            }
+
         }
         else if (stage == 3)
         {

@@ -31,12 +31,13 @@ public class GameManager : MonoBehaviour
     // read only counters for if available to get into garden
     public static int gardenCounter { get; private set; }
     public static int gardenVisits { get; private set; }
+    public static bool initDone = false;
 
     private const int k_totalStorylets = 20;
 
     private Narrative.StoryLet[] allStories = new Narrative.StoryLet[k_totalStorylets];
 
-    private List<int> usedStoryIndex = new List<int>();
+    private static List<int> usedStoryIndex = new List<int>();
 
     public static float UIScale;
     public static GameEvent.EventStates prevES;
@@ -80,11 +81,16 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //m_scores = new uint[4] { 0, 0, 0, 0 }; // uncomment to reset
-        gardenCounter = 0;
-        gardenVisits = 0;
-        print(Screen.currentResolution);
-        LoadJson();
+        if (!initDone)
+        {
+            //reset scores and counts only once per game
+            initDone = true;
+            m_scores = new uint[4] { 0, 0, 0, 0 }; // uncomment to reset
+            gardenCounter = 0;
+            gardenVisits = 0;
+            print(Screen.currentResolution);
+            LoadJson();
+        }
     }
 
     // Update is called once per frame
@@ -184,20 +190,38 @@ public class GameManager : MonoBehaviour
         // return array of count stories
         Narrative.StoryLet[] chosenStories = new Narrative.StoryLet[count];
 
-        for (int i = 0; i < count; i++)
+        if (gardenVisits < 2) // need to just return all stories if last garden visit
         {
-            // get a random number
-            int rn = Random.Range(0, k_totalStorylets);
-
-            // has it been used already? get another
-            while(Instance.usedStoryIndex.Contains(rn))
+            for (int i = 0; i < count; i++)
             {
-                rn = Random.Range(0, k_totalStorylets);
+                // get a random number
+                int rn = Random.Range(0, k_totalStorylets);
+
+                // has it been used already? get another
+                while (usedStoryIndex.Contains(rn))
+                {
+                    rn = Random.Range(0, k_totalStorylets);
+                }
+
+                chosenStories[i] = Instance.allStories[rn];
+
+                usedStoryIndex.Add(rn);
             }
-
-            chosenStories[i] = Instance.allStories[rn];
-
-            Instance.usedStoryIndex.Add(rn);
+        }
+        else
+        {
+            for (int i = 0; i < count; ++i)
+            {
+                for(int j =0; j < k_totalStorylets; ++j)
+                {
+                    // if it hasn't been used. use it
+                    if(!usedStoryIndex.Contains(j))
+                    {
+                        chosenStories[i] = Instance.allStories[j];
+                        usedStoryIndex.Add(j);
+                    }
+                }
+            }
         }
 
         return chosenStories;
