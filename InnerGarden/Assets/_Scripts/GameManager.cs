@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     private Narrative.StoryLet[] allStories = new Narrative.StoryLet[k_totalStorylets];
 
     private static List<int> usedStoryIndex = new List<int>();
+    public static List<int> readStoryIndex = new List<int>();
 
     public static float UIScale;
     public static GameEvent.EventStates prevES;
@@ -90,6 +91,14 @@ public class GameManager : MonoBehaviour
             gardenVisits = 0;
             print(Screen.currentResolution);
             LoadJson();
+        }
+
+        // reset usedStoryIndex every time then set with chosen
+        usedStoryIndex.Clear();
+
+        foreach(int i in readStoryIndex)
+        {
+            usedStoryIndex.Add(i);
         }
     }
 
@@ -150,6 +159,7 @@ public class GameManager : MonoBehaviour
             Instance.allStories[i] = new Narrative.StoryLet();
             Instance.allStories[i].body = root.stories[i].storyletText;
 
+            Instance.allStories[i].id = i;
             int optLen = root.stories[i].storyletOptions.Length;
             Instance.allStories[i].answers = new string[optLen];
             Instance.allStories[i].answerKey = new Narrative.Archetype[optLen];
@@ -190,39 +200,22 @@ public class GameManager : MonoBehaviour
         // return array of count stories
         Narrative.StoryLet[] chosenStories = new Narrative.StoryLet[count];
 
-        if (gardenVisits < 2) // need to just return all stories if last garden visit
+        for (int i = 0; i < count; i++)
         {
-            for (int i = 0; i < count; i++)
+            // get a random number
+            int rn = Random.Range(0, k_totalStorylets);
+
+            // has it been used already? get another
+            while (usedStoryIndex.Contains(rn))
             {
-                // get a random number
-                int rn = Random.Range(0, k_totalStorylets);
-
-                // has it been used already? get another
-                while (usedStoryIndex.Contains(rn))
-                {
-                    rn = Random.Range(0, k_totalStorylets);
-                }
-
-                chosenStories[i] = Instance.allStories[rn];
-
-                usedStoryIndex.Add(rn);
+                rn = Random.Range(0, k_totalStorylets);
             }
+
+            chosenStories[i] = Instance.allStories[rn];
+
+            usedStoryIndex.Add(rn);
         }
-        else
-        {
-            for (int i = 0; i < count; ++i)
-            {
-                for(int j =0; j < k_totalStorylets; ++j)
-                {
-                    // if it hasn't been used. use it
-                    if(!usedStoryIndex.Contains(j))
-                    {
-                        chosenStories[i] = Instance.allStories[j];
-                        usedStoryIndex.Add(j);
-                    }
-                }
-            }
-        }
+      
 
         return chosenStories;
     }
@@ -261,5 +254,9 @@ public class GameManager : MonoBehaviour
         return Instance.m_scores;
     }
 
+    public static void MarkStoryAsRead(Narrative.StoryLet inStory)
+    {
+        readStoryIndex.Add(inStory.id);
+    }
 
 }

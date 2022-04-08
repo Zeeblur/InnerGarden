@@ -28,6 +28,7 @@ namespace Narrative
         public string[] answers;
         public Archetype[] answerKey;
         public CardType cardType;
+        public int id;
     }
 }
 
@@ -275,6 +276,7 @@ public class GameEvent : MonoBehaviour
 
         // Update Text
         currentStoryLet = stories[index];
+        GameManager.MarkStoryAsRead(currentStoryLet);
 
         Text cardText = chosenStoryTrans.GetComponentInChildren<Text>();
 
