@@ -205,6 +205,10 @@ public class FlowerSpawner : MonoBehaviour
 
     public void ChangeFlowerType(Narrative.Archetype domArch, List<GameObject> inFlowers)
     {
+        if (inFlowers.Count == 0)
+        {
+            Debug.Log("No Flower selected to replace " + domArch);
+        }
         print(domArch);
         print(inFlowers);
         if (!dominantMod)
@@ -221,7 +225,7 @@ public class FlowerSpawner : MonoBehaviour
             {
                 if (result != domArch)
                 {
-                    print("ohno");
+                    print("ohno "+ usedIdx + " " + inFlowers.Count);
                     ++usedIdx;
                     if (usedIdx >= inFlowers.Count)
                     {

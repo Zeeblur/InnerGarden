@@ -13,7 +13,7 @@ public class FlowerSystem : MonoBehaviour
     public List<GameObject> neutralFlowers = new List<GameObject>();
     public List<GameObject> unassignedFlowers = new List<GameObject>();
 
-    private string[] catNames = { "CHAMPION", "SOVEREIGN", "LOVER", "MAGICIAN", "NEUTRAL", "unass" };
+    private string[] catNames = { "SOVEREIGN", "CHAMPION", "LOVER", "MAGICIAN", "NEUTRAL", "unass" };
 
     public Transform grassPrefab;
     public int instances = 250;
@@ -29,8 +29,8 @@ public class FlowerSystem : MonoBehaviour
     void Awake()
     {
         //intialise the category lists
-        categories[0] = champFlowers;
-        categories[1] = soveFlowers;
+        categories[0] = soveFlowers;
+        categories[1] = champFlowers;
         categories[2] = loverFlowers;
         categories[3] = mageFlowers;
         categories[4] = neutralFlowers;
@@ -173,14 +173,10 @@ public class FlowerSystem : MonoBehaviour
             // test input 3 1 3 4
             uint[] scoresIn = { 3, 1, 3, 4 };
 
-            // pink blue white none? 
-         // if lover is highest score use this
+            scoresIn = scores;
 
             gardenSpawners[1].SetActive(true);
             gardenIndex = 1;
-
-            // if lover is high keep white as is
-
 
             // sub the pink layer for secondary pink scorer (orignial Sovereign)
             // who's higehst sovern/magician?
@@ -207,11 +203,12 @@ public class FlowerSystem : MonoBehaviour
             }
 
             List<Rank> ranking = GetRank(scoresIn);
+            int rnkIdx = 0;
 
             foreach(FlowerSpawner fSpawn in pinkSpawns)
             {
                 // change the flowers into ranking[0](archetype) pink's flower.
-                Rank rank = ranking[0];
+                Rank rank = ranking[rnkIdx];
 
                 print(categories[rank.location]);
 
@@ -230,11 +227,13 @@ public class FlowerSystem : MonoBehaviour
                 fSpawn.ChangeFlowerType((Narrative.Archetype)rank.location, inFlowers);
             }
 
+            ++rnkIdx;
+
             // blue
             foreach (FlowerSpawner fSpawn in blueSpawns)
             {
                 // change the flowers into ranking[1](archetype) blues flower.
-                Rank rank = ranking[1];
+                Rank rank = ranking[rnkIdx];
 
                 print(categories[rank.location]);
 
@@ -242,21 +241,41 @@ public class FlowerSystem : MonoBehaviour
                 List<GameObject> inFlowers = new List<GameObject>();
                 foreach (GameObject go in categories[rank.location])
                 {
-                    if (go.name.Contains("Blu"))
+                    print("what " + go.name + " " + rank.location);
+                    if (go.name.Contains("Blu") || go.name.Contains("-b"))
                     {
                         inFlowers.Add(go);
                         print("Blue found");
                     }
                 }
 
+                if (inFlowers.Count == 0)
+                {
+                    Debug.Log("No Flower selected to replace bluee, try again with next flower:" );
+                    ++rnkIdx;
+                    rank = ranking[rnkIdx];
+                    foreach (GameObject go in categories[rank.location])
+                    {
+                        print("what " + go.name + " " + rank.location);
+                        if (go.name.Contains("Blu") || go.name.Contains("-b"))
+                        {
+                            inFlowers.Add(go);
+                            print("Blue found");
+                        }
+                    }
+                }
+
+
                 fSpawn.ChangeFlowerType((Narrative.Archetype)rank.location, inFlowers);
             }
+
+            ++rnkIdx;
 
             // white
             foreach (FlowerSpawner fSpawn in whiteSpawns)
             {
                 // change the flowers into ranking[2](archetype) white flower.
-                Rank rank = ranking[2];
+                Rank rank = ranking[rnkIdx];
 
                 List<GameObject> inFlowers = new List<GameObject>();
                 foreach (GameObject go in categories[rank.location])
