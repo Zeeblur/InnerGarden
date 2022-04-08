@@ -18,7 +18,7 @@ Shader "Custom/Waves"
         //LOD 200
         
         CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows vertex:vert addshadow
+        #pragma surface surf Standard vertex:vert
         
         sampler2D _MainTex;
         sampler2D _NormalMap;
