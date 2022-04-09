@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Hold Right mouse button to look up/down, use left/right to spin around centre. After set seconds press space to continue
 public class PlayerController : MonoBehaviour
@@ -23,6 +24,10 @@ public class PlayerController : MonoBehaviour
     {
         startUp = Vector3.up;
         // awake in the garden?
+        if (GameManager.gardenVisits < 3)
+        {
+            storyPrompt.GetComponentInChildren<Text>().text = "Press any key to continue...";
+        }
         StartCoroutine(CountdownSeconds());
     }
 

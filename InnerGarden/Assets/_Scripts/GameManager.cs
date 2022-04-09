@@ -234,7 +234,10 @@ public class GameManager : MonoBehaviour
     public static void LeaveGarden()
     {
         gardenVisits++;
-        SceneManager.LoadScene("Story");
+        if (gardenVisits < 3)
+            SceneManager.LoadScene("Story");
+        else
+            SceneManager.LoadScene("Ending");
     }
 
     public static void PrintScores()
