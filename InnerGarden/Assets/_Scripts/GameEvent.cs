@@ -54,12 +54,8 @@ public class GameEvent : MonoBehaviour
     public string gardenBtnText = "Enter The Garden\n (";
 
     public static List<int> availableStorylets;  // lets hope the GameManger can update this for us, so the "event" doesn't need to know anything about the player. 
-
+      
     public static GameManager gm;
-
-    // Hardcoding colour for archetypes here. TODO: Update with json filling instead
-    public Color[] cardColours = new Color[5];
-
     private GameObject[] cardGOs;
 
     private GameObject chosenStory;
@@ -123,13 +119,6 @@ public class GameEvent : MonoBehaviour
         {
             CreateCard(i);
         }
-
-        // initialise colours TODO not used currently
-        cardColours[0] = new Color(0.95f, 0.6f, 0.1f, 1.0f);
-        cardColours[1] = new Color(0.67f, 0.1f, 0.8f, 1.0f);
-        cardColours[2] = new Color(1.0f, 0.0f, 0.1f, 1.0f);
-        cardColours[3] = new Color(1.0f, 0.6f, 0.9f, 1.0f);
-        cardColours[4] = new Color(0.0f, 0.8f, 0.95f, 1.0f);
 
         // disable the garden button until later.
         gardenButton.GetComponent<Button>().interactable = false;
@@ -207,7 +196,6 @@ public class GameEvent : MonoBehaviour
         if(card.GetComponentInChildren<Image>())
         {
             card.GetComponentInChildren<Image>().sprite = cardBackgrounds[inputChoice];
-            card.GetComponentInChildren<Image>().color = cardColours[inputChoice];
         }
 
         if (card.GetComponentInChildren<Text>()) // nullcheck
@@ -293,9 +281,6 @@ public class GameEvent : MonoBehaviour
             var idx = i; // have to keep a reference of i as using delegate
             cardBtns[i+1].onClick.AddListener(delegate { OptionChosen(currentStoryLet.answerKey[idx]); });
         }
-
-        // adjust the UI to fit the text
-       //cardText.height;
 
         TextGenerator textGen = new TextGenerator();
         TextGenerationSettings generationSettings = cardText.GetGenerationSettings(cardText.rectTransform.rect.size);
